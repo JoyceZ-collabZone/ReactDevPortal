@@ -1,14 +1,15 @@
 # ReactDevPortal
-
 User stories:
 1 user onboarding
 a) developer onboarding
 b) Fintech Adminonboarding
 
+
 2 User authentication
 a) developer sign in
 b) Fintech sign in
 c) staff sign in
+
 
 3 User Log out
 a) developer log out
