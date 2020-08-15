@@ -1,0 +1,923 @@
+swagger: "2.0"
+x-swagstar:
+  category: "Product Management:Product Directory"
+x-generation-date: "December 18, 2018 8:58 AM"
+x-workspaceId: qhAvZakoARiuseau8
+externalDocs:
+  description: API Docs
+  url: "https://developer.nab.com.au"
+info:
+  title: Products
+  description: "Open Banking product APIs let you retrieve NAB product specific information."
+  version: v1.1
+  contact:
+    name: "Nab OB API Team"
+    url: "https://developer.nab.com.au"
+    email: "nabapi@nab.com.au"
+host: openbank.api.nab.com.au
+tags:
+  - name: Products
+    description: "Retrieve a list of NAB products, as well as detailed product information on a single product, which are part of the Open Banking scheme, and are currently openly offered to the market."
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  servers:
+    - url: https://openbank.api.nab.com.au
+      description: Live Server
+  /cds-au/v1/banking/products:
+    x-swagstar:
+      name: Product
+    options:
+      summary: CORS support
+      x-swagstar:
+        apiAuth: noAuth
+        apiTarget:
+          - service
+          - openbank
+        plugins:
+          route-rate-limiting:
+            second: 10
+      description: Enable CORS by returning correct headers
+      parameters:
+        - $ref: "#/parameters/ParamEffective"
+        - $ref: "#/parameters/ParamUpdatedSince"
+        - $ref: "#/parameters/ParamBrand"
+        - $ref: "#/parameters/ParamProductCategory"
+        - $ref: "#/parameters/ParamPage"
+        - $ref: "#/parameters/ParamPageSize"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - CORS
+      responses:
+        "200":
+          description: Default response for CORS method.
+        "503":
+          description: Service is currently unavailable.
+        "500":
+          description: Something went wrong.
+        "429":
+          description: The operation was refused as too many requests have been made within a certain timeframe.
+        "403":
+          description: Token has incorrect scope or a security policy was violated.
+        "400":
+          description: Request has malformed, missing or non-compliant JSON body or URL parameters.
+        "401":
+          description: Authorization header missing or invalid token.
+    get:
+      summary: Get Products
+      description: Obtain a list of products that are currently openly offered to the market
+      operationId: listProducts
+      x-swagstar:
+        apiAuth: noAuth
+        apiTarget:
+          - service
+          - openbank
+        plugins:
+          route-rate-limiting:
+            second: 10
+      x-scopes: []
+      tags:
+        - Products
+      parameters:
+        - $ref: "#/parameters/ParamEffective"
+        - $ref: "#/parameters/ParamUpdatedSince"
+        - $ref: "#/parameters/ParamBrand"
+        - $ref: "#/parameters/ParamProductCategory"
+        - $ref: "#/parameters/ParamPage"
+        - $ref: "#/parameters/ParamPageSize"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ResponseBankingProductList"
+        "503":
+          description: Service is currently unavailable.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "500":
+          description: Something went wrong.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "429":
+          description: The operation was refused as too many requests have been made within a certain timeframe.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "403":
+          description: Token has incorrect scope or a security policy was violated.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "400":
+          description: Request has malformed, missing or non-compliant JSON body or URL parameters.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "401":
+          description: Authorization header missing or invalid token.
+          schema:
+            $ref: "#/definitions/ErrorList"
+      x-version: "2"
+  "/cds-au/v1/banking/products/{productId}":
+    x-swagstar:
+      name: ProductDetails
+    options:
+      summary: CORS support
+      x-swagstar:
+        apiAuth: noAuth
+        apiTarget:
+          - service
+          - openbank
+        plugins:
+          route-rate-limiting:
+            second: 10
+      description: Enable CORS
+      parameters:
+        - $ref: "#/parameters/ParamProductId"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - CORS
+      responses:
+        "200":
+          description: Default response for CORS method
+        "503":
+          description: Service is currently unavailable.
+        "500":
+          description: Something went wrong.
+        "429":
+          description: The operation was refused as too many requests have been made within a certain timeframe.
+        "403":
+          description: Token has incorrect scope or a security policy was violated.
+        "400":
+          description: Request has malformed, missing or non-compliant JSON body or URL parameters.
+        "401":
+          description: Authorization header missing or invalid token.
+    get:
+      servers:
+      summary: Get Product Detail
+      description: Obtain detailed information on a single product offered openly to the market
+      operationId: getProductDetail
+      x-swagstar:
+        apiAuth: noAuth
+        apiTarget:
+          - service
+          - openbank
+        plugins:
+          route-rate-limiting:
+            second: 10
+      x-scopes: []
+      tags:
+        - Products
+        - Product By Id
+      parameters:
+        - name: productId
+          in: path
+          description: ID of the specific product requested
+          required: true
+          type: string
+          format: ASCIIString
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/ResponseBankingProductById"
+        "503":
+          description: Service is currently unavailable.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "500":
+          description: Something went wrong.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "429":
+          description: The operation was refused as too many requests have been made within a certain timeframe.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "403":
+          description: Token has incorrect scope or a security policy was violated.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "400":
+          description: Request has malformed, missing or non-compliant JSON body or URL parameters.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "401":
+          description: Authorization header missing or invalid token.
+          schema:
+            $ref: "#/definitions/ErrorList"
+      x-version: "2"
+securityDefinitions: {}
+definitions:
+  BankingProduct:
+    type: object
+    required:
+      - productId
+      - lastUpdated
+      - productCategory
+      - name
+      - description
+      - brand
+      - isTailored
+    properties:
+      productId:
+        type: string
+        description: A provider specific unique identifier for this product. This identifier must be unique to a product but does not otherwise need to adhere to ID permanence guidelines.
+        format: ASCIIString
+      effectiveFrom:
+        type: string
+        description: The date and time from which this product is effective (ie. is available for origination).  Used to enable the articulation of products to the regime before they are available for customers to originate
+        format: DateTimeString
+      effectiveTo:
+        type: string
+        description: The date and time at which this product will be retired and will no longer be offered.  Used to enable the managed deprecation of products
+        format: DateTimeString
+      lastUpdated:
+        type: string
+        description: The last date and time that the information for this product was changed (or the creation date for the product if it has never been altered)
+        format: DateTimeString
+      productCategory:
+        $ref: "#/definitions/EnumProductCategory"
+      name:
+        type: string
+        description: The display name of the product
+      description:
+        type: string
+        description: A description of the product
+      brand:
+        type: string
+        description: A label of the brand for the product. Able to be used for filtering. For data providers with single brands this value is still required
+      brandName:
+        type: string
+        description: An optional display name of the brand
+      applicationUri:
+        type: string
+        description: A link to the an application web page where this product can be applied for.
+        format: URIString
+      isTailored:
+        type: boolean
+        description: Indicates whether the product is specifically tailored to a circumstance.  In this case fees and prices are significantly negotiated depending on context. While all products are open to a degree of tailoring this flag indicates that tailoring is expected and thus that the provision of specific fees and rates is not applicable
+      additionalInformation:
+        type: object
+        properties:
+          overviewUri:
+            type: string
+            description: General overview of the product
+            format: URIString
+          termsUri:
+            type: string
+            description: Terms and conditions for the product
+            format: URIString
+          eligibilityUri:
+            type: string
+            description: Eligibility rules and criteria for the product
+            format: URIString
+          feesAndPricingUri:
+            type: string
+            description: "Description of fees, pricing, discounts, exemptions and bonuses for the product"
+            format: URIString
+          bundleUri:
+            type: string
+            description: Description of a bundle that this product can be part of
+            format: URIString
+  BankingProductDetail:
+    allOf:
+      - $ref: "#/definitions/BankingProduct"
+      - type: object
+        properties:
+          bundles:
+            type: array
+            items:
+              $ref: "#/definitions/BankingProductBundle"
+          features:
+            type: array
+            items:
+              $ref: "#/definitions/BankingProductFeature"
+          constraints:
+            type: array
+            items:
+              $ref: "#/definitions/BankingProductConstraint"
+          eligibility:
+            type: array
+            items:
+              $ref: "#/definitions/BankingProductEligibility"
+          fees:
+            type: array
+            items:
+              $ref: "#/definitions/BankingProductFee"
+          depositRates:
+            type: array
+            items:
+              $ref: "#/definitions/BankingProductDepositRate"
+          lendingRates:
+            type: array
+            items:
+              $ref: "#/definitions/BankingProductLendingRate"
+  BankingProductBundle:
+    type: object
+    required:
+      - name
+      - description
+      - productIds
+    properties:
+      name:
+        type: string
+        description: Name of the bundle
+      description:
+        type: string
+        description: Description of the bundle
+      additionalInfoUri:
+        type: string
+        description: Link to a web page with more information on the bundle criteria and benefits
+        format: URIString
+      productIds:
+        type: array
+        description: Array of product IDs for products included in the bundle
+        items:
+          type: string
+          format: ASCIIString
+  BankingProductFeature:
+    type: object
+    required:
+      - featureType
+    properties:
+      featureType:
+        type: string
+        description: The type of feature described
+        enum:
+          - CARD_ACCESS
+          - ADDITIONAL_CARDS
+          - UNLIMITED_TXNS
+          - FREE_TXNS
+          - FREE_TXNS_ALLOWANCE
+          - LOYALTY_PROGRAM
+          - OFFSET
+          - OVERDRAFT
+          - REDRAW
+          - INSURANCE
+          - BALANCE_TRANSFERS
+          - INTEREST_FREE
+          - INTEREST_FREE_TRANSFERS
+          - DIGITAL_WALLET
+          - DIGITAL_BANKING
+          - NPP_PAYID
+          - NPP_ENABLED
+          - DONATE_INTEREST
+          - BILL_PAYMENT
+      additionalValue:
+        type: string
+        description: Generic field containing additional information relevant to the featureType specified. Whether mandatory or not is dependent on the value of featureType
+  BankingProductConstraint:
+    type: object
+    required:
+      - constraintType
+    properties:
+      constraintType:
+        type: string
+        description: The type of constraint described.  See the next section for an overview of valid values and their meaning
+        enum:
+          - MIN_BALANCE
+          - OPENING_BALANCE
+          - MAX_LIMIT
+          - MIN_LIMIT
+      additionalValue:
+        type: string
+        description: Generic field containing additional information relevant to the constraintType specified.  Whether mandatory or not is dependent on the value of constraintType
+  BankingProductEligibility:
+    type: object
+    required:
+      - eligibilityType
+    properties:
+      eligibilityType:
+        type: string
+        description: The type of eligibility criteria described.  See the next section for an overview of valid values and their meaning
+        enum:
+          - BUSINESS
+          - PENSION_RECIPIENT
+          - MIN_AGE
+          - MAX_AGE
+          - MIN_INCOME
+          - MIN_TURNOVER
+          - STAFF
+          - STUDENT
+          - EMPLOYMENT_STATUS
+          - RESIDENCY_STATUS
+          - OTHER
+      additionalValue:
+        type: string
+        description: Generic field containing additional information relevant to the eligibilityType specified.  Whether mandatory or not is dependent on the value of eligibilityType
+      additionalInfo:
+        type: string
+        description: Display text providing more information on the eligibility criteria. Mandatory if the eligibilityType field is set to OTHER
+      additionalInfoUri:
+        type: string
+        description: Link to a web page with more information on this eligibility criteria
+        format: URIString
+  BankingProductFee:
+    type: object
+    required:
+      - name
+      - feeType
+    properties:
+      name:
+        type: string
+        description: Name of the fee
+      feeType:
+        type: string
+        description: The type of fee
+        enum:
+          - PERIODIC
+          - WITHDRAWAL
+          - DEPOSIT
+          - PAYMENT
+          - PURCHASE
+          - EVENT
+          - UPFRONT
+          - EXIT
+      amount:
+        type: string
+        description: "The amount charged for the fee. Assumed to be in AUD. One of amount, balanceRate, transactionRate and accruedRate is mandatory"
+        format: AmountString
+      balanceRate:
+        type: string
+        description: "A fee rate calculated based on a proportion of the balance. Assumed to be in AUD. One of amount, balanceRate, transactionRate and accruedRate is mandatory"
+        format: RateString
+      transactionRate:
+        type: string
+        description: "A fee rate calculated based on a proportion of a transaction. Assumed to be in AUD. One of amount, balanceRate, transactionRate and accruedRate is mandatory"
+        format: RateString
+      accruedRate:
+        type: string
+        description: "A fee rate calculated based on a proportion of the calculated interest accrued on the account. One of amount, balanceRate, transactionRate and accruedRate is mandatory"
+        format: RateString
+      accrualFrequency:
+        type: string
+        description: "The indicative frequency with which the fee is calculated on the account. Only applies if balanceRate or accruedRate is also present. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)"
+        format: CurrencyString
+      currency:
+        type: string
+        description: The currency the fee will be charged in. Assumes AUD if absent
+        format: CurrencyString
+      additionalValue:
+        type: string
+        description: Generic field containing additional information relevant to the feeType specified. Whether mandatory or not is dependent on the value of feeType
+      additionalInfo:
+        type: string
+        description: Display text providing more information on the fee
+      additionalInfoUri:
+        type: string
+        description: Link to a web page with more information on this fee
+        format: URIString
+      discounts:
+        type: array
+        items:
+          $ref: "#/definitions/BankingProductDiscount"
+  BankingProductDiscount:
+    type: object
+    required:
+      - description
+      - discountType
+    properties:
+      description:
+        type: string
+        description: Description of the discount
+      discountType:
+        type: string
+        description: The type of discount. See the next section for an overview of valid values and their meaning
+        enum:
+          - BALANCE
+          - DEPOSITS
+          - PAYMENTS
+          - FEE_CAP
+          - ELIGIBILITY_ONLY
+      amount:
+        type: string
+        description: "Value of the discount. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate and accruedRate is mandatory"
+        format: AmountString
+      balanceRate:
+        type: string
+        description: "A discount rate calculated based on a proportion of the balance. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate and accruedRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee"
+        format: RateString
+      transactionRate:
+        type: string
+        description: "A discount rate calculated based on a proportion of atransaction. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate and accruedRate is mandatory"
+        format: RateString
+      accruedRate:
+        type: string
+        description: "A discount rate calculated based on a proportion of the calculated interest accrued on the account. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate and accruedRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee"
+        format: RateString
+      additionalValue:
+        type: string
+        description: Generic field containing additional information relevant to the discountType specified. Whether mandatory or not is dependent on the value of discountType
+      eligibility:
+        type: array
+        items:
+          $ref: "#/definitions/BankingProductDiscountEligibility"
+      additionalInfo:
+        type: string
+        description: Display text providing more information on the discount
+      additionalInfoUri:
+        type: string
+        description: Link to a web page with more information on this discount
+        format: URIString
+  ResponseBankingProductList:
+    type: object
+    required:
+      - data
+      - links
+      - meta
+    properties:
+      data:
+        type: object
+        required:
+          - products
+        properties:
+          products:
+            type: array
+            items:
+              $ref: "#/definitions/BankingProduct"
+      links:
+        $ref: "#/definitions/Links"
+      meta:
+        $ref: "#/definitions/MetaPaginated"
+  ResponseBankingProductById:
+    type: object
+    required:
+      - data
+      - links
+      - meta
+    properties:
+      data:
+        $ref: "#/definitions/BankingProductDetail"
+      links:
+        $ref: "#/definitions/Links"
+      meta:
+        $ref: "#/definitions/Meta"
+  BankingProductDiscountEligibility:
+    type: object
+    required:
+      - discountEligibilityType
+    properties:
+      discountEligibilityType:
+        type: string
+        description: The type of the specific eligibility constraint for a discount
+        enum:
+          - PENSION_RECIPIENT
+          - MIN_AGE
+          - MAX_AGE
+          - STAFF
+          - STUDENT
+          - EMPLOYMENT_STATUS
+          - RESIDENCY_STATUS
+          - OTHER
+      additionalValue:
+        type: string
+        description: Generic field containing additional information relevant to the discountEligibilityType specified. Whether mandatory or not is dependent on the value of discountEligibilityType
+      additionalInfo:
+        type: string
+        description: Display text providing more information on this eligibility constraint
+      additionalInfoUri:
+        type: string
+        description: Link to a web page with more information on this eligibility constraint
+        format: URIString
+  BankingProductDepositRate:
+    type: object
+    required:
+      - depositRateType
+      - rate
+    properties:
+      depositRateType:
+        type: string
+        description: "The type of rate (base, bonus, etc). See the next section for an overview of valid values and their meaning"
+        enum:
+          - FIXED
+          - BONUS
+          - BUNDLE_BONUS
+          - VARIABLE
+          - INTRODUCTORY
+      rate:
+        type: string
+        description: The rate to be applied
+        format: RateString
+      calculationFrequency:
+        type: string
+        description: "The period after which the rate is applied to the balance to calculate the amount due for the period. Calculation of the amount is often daily (as balances may change) but accumulated until the total amount is 'applied' to the account (see applicationFrequency). Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)"
+      applicationFrequency:
+        type: string
+        description: "The period after which the calculated amount(s) (see calculationFrequency) are 'applied' (i.e. debited or credited) to the account. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)"
+      tiers:
+        type: array
+        description: "Properties of the product that determined whether this rate applies. This criteria could be a single value (e.g. 3 month term deposit term) or a range of values that a factor must fall within for this rate to apply e.g. account balance in range $100,000 - $200,000, loan-to-value ratio in range 70% – 80%"
+        items:
+          $ref: "#/definitions/BankingProductRateTier"
+      additionalValue:
+        type: string
+        description: Generic field containing additional information relevant to the depositRateType specified. Whether mandatory or not is dependent on the value of depositRateType
+      additionalInfo:
+        type: string
+        description: Display text providing more information on the fee
+      additionalInfoUri:
+        type: string
+        description: Link to a web page with more information on this fee
+        format: URIString
+  BankingProductLendingRate:
+    type: object
+    required:
+      - lendingRateType
+      - rate
+    properties:
+      lendingRateType:
+        type: string
+        description: "The type of rate (fixed, variable, etc). See the next section for an overview of valid values and their meaning"
+        enum:
+          - FIXED
+          - VARIABLE
+          - INTRODUCTORY
+          - DISCOUNT
+          - PENALTY
+          - FLOATING
+          - MARKET_LINKED
+          - CASH_ADVANCE
+          - BUNDLE_DISCOUNT_FIXED
+          - BUNDLE_DISCOUNT_VARIABLE
+          - COMPARISON_FIXED
+          - COMPARISON_VARIABLE
+      rate:
+        type: string
+        description: The rate to be applied
+        format: RateString
+      calculationFrequency:
+        type: string
+        description: "The period after which the rate is applied to the balance to calculate the amount due for the period. Calculation of the amount is often daily (as balances may change) but accumulated until the total amount is 'applied' to the account (see applicationFrequency). Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)"
+      applicationFrequency:
+        type: string
+        description: "The period after which the calculated amount(s) (see calculationFrequency) are 'applied' (i.e. debited or credited) to the account. Formatted according to [ISO 8601 Durations](https://en.wikipedia.org/wiki/ISO_8601#Durations)"
+      paymentStructureType:
+        type: string
+        description: When loan payments are due to be paid within each period. The investment benefit of earlier payments affect the rate that can be offered
+        enum:
+          - IN_ARREARS
+          - IN_ADVANCE
+      tiers:
+        type: array
+        description: "Properties of the product that determined whether this rate applies. This criteria could be a single value (e.g. 3 month term deposit term) or a range of values that a factor must fall within for this rate to apply e.g. account balance in range $100,000 - $200,000, loan-to-value ratio in range 70% – 80%"
+        items:
+          $ref: "#/definitions/BankingProductRateTier"
+      additionalValue:
+        type: string
+        description: Information relevant to the lendingRateType specified.  Whether mandatory or not is dependent on the Generic field containing additional information relevant to the lendingRateType specified. Whether mandatory or not is dependent on the value of lendingRateType
+      additionalInfo:
+        type: string
+        description: Display text providing more information on the fee.
+      additionalInfoUri:
+        type: string
+        description: Link to a web page with more information  on this fee
+        format: URIString
+  BankingProductRateTier:
+    type: object
+    description: Defines the criteria and conditions for which a rate applies
+    required:
+      - unitOfMeasure
+      - minimumValue
+      - maximumValue
+    properties:
+      unitOfMeasure:
+        type: string
+        description: "The unit of measure that applies to the tierValueMinimum and tierValueMaximum values e.g. 'DOLLAR', 'MONTH' (in the case of term deposit tiers), 'PERCENT' (in the case of loan-to-value ratio or LVR)"
+        enum:
+          - DOLLAR
+          - PERCENT
+          - MONTH
+          - DAY
+      minimumValue:
+        type: number
+        description: The number of tierUnitOfMeasure units that form the lower bound of the tier. The tier should be inclusive of this value
+      maximumValue:
+        type: number
+        description: "The number of tierUnitOfMeasure units that form the upper bound of the tier or band. For a tier with a discrete value (as opposed to a range of values e.g. 1 month) this must be the same as tierValueMinimum. Where this is the same as the tierValueMinimum value of the next-higher tier the referenced tier should be exclusive of this value. For example a term deposit of 2 months falls into the upper tier of the following tiers: (1 – 2 months, 2 – 3 months)"
+      rateApplicationMethod:
+        type: string
+        description: "The method used to calculate the amount to be applied using one or more tiers. A single rate may be applied to the entire balance or each applicable tier rate is applied to the portion of the balance that falls into that tier (referred to as 'bands' or 'steps')"
+        enum:
+          - WHOLE_BALANCE
+          - PER_TIER
+      applicabilityConditions:
+        type: array
+        description: Other conditions required to be met for this rate to apply
+        items:
+          $ref: "#/definitions/BankingProductRateCondition"
+      subTiers:
+        type: array
+        description: Sub tiers applicable within this tier
+        items:
+          type: object
+          description: Defines the sub-tier criteria and conditions for which a rate applies
+          required:
+            - unitOfMeasure
+            - minimumValue
+            - maximumValue
+          properties:
+            unitOfMeasure:
+              type: string
+              description: "The unit of measure that applies to the tierValueMinimum and tierValueMaximum values e.g. 'DOLLAR', 'MONTH' (in the case of term deposit tiers), 'PERCENT' (in the case of loan-to-value ratio or LVR)"
+              enum:
+                - DOLLAR
+                - PERCENT
+                - MONTH
+                - DAY
+            minimumValue:
+              type: number
+              description: The number of tierUnitOfMeasure units that form the lower bound of the tier. The tier should be inclusive of this value
+            maximumValue:
+              type: number
+              description: "The number of tierUnitOfMeasure units that form the upper bound of the tier or band. For a tier with a discrete value (as opposed to a range of values e.g. 1 month) this must be the same as tierValueMinimum. Where this is the same as the tierValueMinimum value of the next-higher tier the referenced tier should be exclusive of this value. For example a term deposit of 2 months falls into the upper tier of the following tiers: (1 – 2 months, 2 – 3 months)"
+            rateApplicationMethod:
+              type: string
+              description: "The method used to calculate the amount to be applied using one or more tiers. A single rate may be applied to the entire balance or each applicable tier rate is applied to the portion of the balance that falls into that tier (referred to as 'bands' or 'steps')"
+              enum:
+                - WHOLE_BALANCE
+                - PER_TIER
+            applicabilityConditions:
+              type: array
+              description: Other conditions required to be met for this rate to apply
+              items:
+                $ref: "#/definitions/BankingProductRateCondition"
+  BankingProductRateCondition:
+    type: object
+    description: Defines a condition for the applicability of a tiered rate
+    properties:
+      additionalInfo:
+        type: string
+        description: Display text providing more information on the rate condition
+      additionalInfoUri:
+        type: string
+        description: Link to a web page with more information  on this rate condition
+        format: URIString
+  EnumProductCategory:
+    type: string
+    description: The list of available product categories for categorising products and accounts
+    enum:
+      - PERS_AT_CALL_DEPOSITS
+      - BUS_AT_CALL_DEPOSITS
+      - TERM_DEPOSITS
+      - RESIDENTIAL_MORTGAGES
+      - PERS_CRED_AND_CHRG_CARDS
+      - BUS_CRED_AND_CHRG_CARDS
+      - PERS_LOANS
+      - PERS_LEASING
+      - BUS_LEASING
+      - TRADE_FINANCE
+      - PERS_OVERDRAFT
+      - BUS_OVERDRAFT
+      - BUS_LOANS
+      - FOREIGN_CURR_AT_CALL_DEPOSITS
+      - FOREIGN_CURR_TERM_DEPOSITS
+      - FOREIGN_CURR_LOAN
+      - FOREIGN_CURRRENCT_OVERDRAFT
+      - TRAVEL_CARD
+  error:
+    type: object
+    properties:
+      errorId:
+        type: string
+        description: "Human readable, unique name or unique Id of the error. It is recommended that this value is streamed out in error response from catalog's error_spec.json#name."
+      message:
+        type: string
+        description: "Message describing the error. It is recommended that this value is streamed out in error response from catalog's error_spec.json#message."
+  Meta:
+    type: object
+  Links:
+    type: object
+    properties:
+      self:
+        type: string
+        description: Fully qualified link to this API call
+        format: URIString
+      first:
+        type: string
+        description: URI to the first page of this set. Mandatory if this response is not the first page
+        format: URIString
+      prev:
+        type: string
+        description: URI to the first previous page of this set. Mandatory if this response is not the first page
+        format: URIString
+      next:
+        type: string
+        description: URI to the first next page of this set. Mandatory if this response is not the last page
+        format: URIString
+      last:
+        type: string
+        description: URI to the first last page of this set. Mandatory if this response is not the last page
+        format: URIString
+  MetaPaginated:
+    type: object
+    properties:
+      totalRecords:
+        type: integer
+        description: The total number of records in the full set
+        format: NaturalNumber
+      totalPages:
+        type: integer
+        description: The total number of pages in the full set
+        format: NaturalNumber
+  ErrorList:
+    type: object
+    required:
+      - errors
+    properties:
+      errors:
+        type: array
+        items:
+          type: object
+          required:
+            - code
+            - title
+            - detail
+          properties:
+            code:
+              type: string
+              description: The code of the error
+            title:
+              type: string
+              description: A displayable title of the error type
+            detail:
+              type: string
+              description: Detail of the error
+            meta:
+              type: object
+              description: Optional additional data for specific error types
+parameters:
+  ParamEffective:
+    name: effective
+    in: query
+    description: "Allows for the filtering of products based on whether the current time is within the period of time defined as effective by the effectiveFrom and effectiveTo fields. If absent defaults to 'CURRENT'"
+    required: false
+    type: string
+    enum:
+      - CURRENT
+      - FUTURE
+      - ALL
+  ParamUpdatedSince:
+    name: updated-since
+    in: query
+    description: Only include products that have been updated after the specified date and time. If absent defaults to include all products
+    required: false
+    type: string
+  ParamBrand:
+    name: brand
+    in: query
+    description: Filter results based on a specific brand
+    required: false
+    type: string
+  ParamProductCategory:
+    name: product-category
+    in: query
+    description: Used to filter results on the productCategory field applicable to accounts. Any one of the valid values for this field can be supplied. If absent then all accounts returned.
+    required: false
+    type: string
+    enum:
+      - PERS_AT_CALL_DEPOSITS
+      - BUS_AT_CALL_DEPOSITS
+      - TERM_DEPOSITS
+      - RESIDENTIAL_MORTGAGES
+      - PERS_CRED_AND_CHRG_CARDS
+      - BUS_CRED_AND_CHRG_CARDS
+      - PERS_LOANS
+      - PERS_LEASING
+      - BUS_LEASING
+      - TRADE_FINANCE
+      - PERS_OVERDRAFT
+      - BUS_OVERDRAFT
+      - BUS_LOANS
+      - FOREIGN_CURR_AT_CALL_DEPOSITS
+      - FOREIGN_CURR_TERM_DEPOSITS
+      - FOREIGN_CURR_LOAN
+      - FOREIGN_CURRRENCT_OVERDRAFT
+      - TRAVEL_CARD
+  ParamPage:
+    name: page
+    in: query
+    description: Page of results to request (standard pagination)
+    required: false
+    type: integer
+    default: "1"
+  ParamPageSize:
+    name: page-size
+    in: query
+    description: Page size to request. Default is 25 (standard pagination)
+    required: false
+    type: integer
+    default: "25"
+  ParamProductId:
+    name: productId
+    in: path
+    description: ID of the specific product requested
+    required: true
+    type: string
+    format: ASCIIString

@@ -1,0 +1,304 @@
+swagger: "2.0"
+x-swagstar:
+  category: "Customer Management:Customer Reference Data Mgmt"
+x-generation-date: "March 6, 2019 11:54 AM"
+x-workspaceId: qhAvZakoARiuseau8
+externalDocs:
+  description: API Docs
+  url: "https://developer.nab.com.au"
+info:
+  title: Customer
+  description: Retrieve personal information on an authorised NAB customer
+  version: v1.1
+  contact:
+    name: "Nab OB API Team"
+    url: "https://developer.nab.com.au"
+    email: "nabapi@nab.com.au"
+host: openbank-secure.api.nab.com.au
+tags:
+  - name: Customer
+    description: Retrieve personal information on an authorised NAB customer
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  servers:
+    - url: https://openbank-secure.api.nab.com.au
+      description: Live Server
+  /cds-au/v1/common/customer:
+    x-swagstar:
+      name: Customer
+    options:
+      summary: CORS support
+      x-swagstar:
+        apiAuth: jwt
+        apiTarget:
+          - service
+          - openbank
+        plugins:
+          route-rate-limiting:
+            second: 10
+          openid-connect-v2:
+            scopes_required:
+              - common:customer.basic:read
+            audience_required:
+              - obapi
+            acr:
+              - "urn:cds.au:cdr:2"
+            tls_bound_token: false
+      description: Enable CORS by returning correct headers
+      parameters: []
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - CORS
+      responses:
+        "200":
+          description: Default response for CORS method.
+        "503":
+          description: Service is currently unavailable.
+        "500":
+          description: Something went wrong.
+        "429":
+          description: The operation was refused as too many requests have been made within a certain timeframe.
+        "403":
+          description: Token has incorrect scope or a security policy was violated.
+        "400":
+          description: Request has malformed, missing or non-compliant JSON body or URL parameters.
+        "401":
+          description: Authorization header missing or invalid token.
+    get:
+      summary: Get Customer
+      description: Obtain basic information on the customer that has authorised the current session
+      operationId: getCustomer
+      x-swagstar:
+        apiAuth: jwt
+        apiTarget:
+          - service
+          - openbank
+        plugins:
+          route-rate-limiting:
+            second: 10
+          openid-connect-v2:
+            scopes_required:
+              - common:customer.basic:read
+            audience_required:
+              - obapi
+            acr:
+              - "urn:cds.au:cdr:2"
+            tls_bound_token: false
+      x-scopes:
+        - common_basic_customer
+      tags:
+        - Common APIs
+        - Customer
+      parameters: []
+      responses:
+        "200":
+          description: Request completed successfully.
+          schema:
+            $ref: "#/definitions/ResponseCommonCustomer"
+        "503":
+          description: Service is currently unavailable.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "500":
+          description: Something went wrong.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "429":
+          description: The operation was refused as too many requests have been made within a certain timeframe.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "403":
+          description: Token has incorrect scope or a security policy was violated.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "400":
+          description: Request has malformed, missing or non-compliant JSON body or URL parameters.
+          schema:
+            $ref: "#/definitions/ErrorList"
+        "401":
+          description: Authorization header missing or invalid token.
+          schema:
+            $ref: "#/definitions/ErrorList"
+      x-version: "1"
+securityDefinitions: {}
+definitions:
+  ResponseCommonCustomer:
+    type: object
+    required:
+      - data
+      - links
+      - meta
+    properties:
+      data:
+        type: object
+        required:
+          - customerUType
+        properties:
+          customerUType:
+            type: string
+            description: The type of customer object that is present
+            enum:
+              - person
+              - organisation
+          person:
+            $ref: "#/definitions/CommonPerson"
+          organisation:
+            $ref: "#/definitions/CommonOrganisation"
+      links:
+        $ref: "#/definitions/Links"
+      meta:
+        $ref: "#/definitions/Meta"
+  ErrorList:
+    type: object
+    required:
+      - errors
+    properties:
+      errors:
+        type: array
+        items:
+          type: object
+          required:
+            - code
+            - title
+            - detail
+          properties:
+            code:
+              type: string
+              description: The code of the error
+            title:
+              type: string
+              description: A displayable title of the error type
+            detail:
+              type: string
+              description: Detail of the error
+            meta:
+              type: object
+              description: Optional additional data for specific error types
+  CommonPerson:
+    type: object
+    required:
+      - lastUpdateTime
+      - lastName
+      - middleNames
+    properties:
+      lastUpdateTime:
+        type: string
+        description: >-
+          The date and time that this record was last updated by the customer.
+          If no update has occurred then this date should reflect the initial
+          creation date for the data
+        format: DateTimeString
+      firstName:
+        type: string
+        description: >-
+          For people with single names this field need not be present.  The
+          single name should be in the lastName field
+      lastName:
+        type: string
+        description: For people with single names the single name should be in this field
+      middleNames:
+        type: array
+        description: Field is mandatory but array may be empty
+        items:
+          type: string
+      prefix:
+        type: string
+        description: >-
+          Also known as title or salutation.  The prefix to the name (e.g. Mr,
+          Mrs, Ms, Miss, Sir, etc)
+      suffix:
+        type: string
+        description: Used for a trailing suffix to the name (e.g. Jr)
+      occupationCode:
+        type: string
+        description: >-
+          Value is a valid [ANZCO v1.2](http://www.abs.gov.au/ANZSCO) Standard
+          Occupation classification.
+  CommonOrganisation:
+    type: object
+    required:
+      - lastUpdateTime
+      - agentLastName
+      - agentRole
+      - businessName
+      - organisationType
+    properties:
+      lastUpdateTime:
+        type: string
+        description: >-
+          The date and time that this record was last updated by the customer.
+          If no update has occurred then this date should reflect the initial
+          creation date for the data
+        format: DateTimeString
+      agentFirstName:
+        type: string
+        description: >-
+          The first name of the individual providing access on behalf of the
+          organisation. For people with single names this field need not be
+          present.  The single name should be in the lastName field
+      agentLastName:
+        type: string
+        description: >-
+          The last name of the individual providing access on behalf of the
+          organisation. For people with single names the single name should be
+          in this field
+      agentRole:
+        type: string
+        description: >-
+          The role of the individual identified as the agent who is providing
+          authorisation.  Expected to be used for display.  Default to
+          “Unspecified” if the role is not known
+      businessName:
+        type: string
+        description: Name of the organisation
+      legalName:
+        type: string
+        description: "Legal name, if different to the business name"
+      shortName:
+        type: string
+        description: "Short name used for communication, if  different to the business name"
+      abn:
+        type: string
+        description: Australian Business Number for the organisation
+      acn:
+        type: string
+        description: >-
+          Australian Company Number for the organisation. Required only if an
+          ACN is applicable for the organisation type
+      isACNCRegistered:
+        type: boolean
+        description: >-
+          True if registered with the ACNC.  False if not. Absent or null if not
+          confirmed.
+      industryCode:
+        type: string
+        description: >-
+          [ANZSIC (2006)](http://www.abs.gov.au/anzsic) code for the
+          organisation.
+      organisationType:
+        type: string
+        description: Legal organisation type
+        enum:
+          - SOLE_TRADER
+          - COMPANY
+          - PARTNERSHIP
+          - TRUST
+          - GOVERNMENT_ENTITY
+          - OTHER
+      registeredCountry:
+        type: string
+        description: >-
+          Enumeration with values from ISO 3166 Alpha-3 country codes.  Assumed
+          to be AUS if absent
+      establishmentDate:
+        type: string
+        description: The date the organisation described was established
+        format: DateString
