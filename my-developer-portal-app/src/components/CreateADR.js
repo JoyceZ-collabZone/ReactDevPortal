@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
+
 // use const for functions when it's functional components
 export function CreateADR(props) {
   const [username, setUserName] = useState(props.getByIDAResult.username);
@@ -41,75 +43,92 @@ export function CreateADR(props) {
   };
 
   return (
-    <>
-      <h2>{props.pageTitle}</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          User Name:
-          <input
-            type="text"
-            name="username"
-            onChange={(e) => setUserName(e.currentTarget.value)}
-            value={username}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            onChange={(e) => setPassword(e.currentTarget.value)}
-            value={password}
-          />
-        </label>
-        <label>
-          Profile:
-          <input
-            type="text"
-            name="profile"
-            onChange={(e) => setProfile(e.currentTarget.value)}
-            value={profile}
-          />
-        </label>
-        <label>
-          Legal Entity Name:
-          <input
-            type="text"
-            name="legalEntityName"
-            onChange={(e) => setLegalEntityName(e.currentTarget.value)}
-            value={legalEntityName}
-          />
-        </label>
-        <label>
-          industry:
-          <input
-            type="text"
-            name="industry"
-            onChange={(e) => setIndustry(e.currentTarget.value)}
-            value={industry}
-          />
-        </label>{" "}
-        <label>
-          Legal Entity Logo URL:
-          <input
+    <div className="formContainer">
+      <h2 >{props.pageTitle}</h2>
+      <Form onSubmit={handleSubmit}>
+        <Row form>
+          <Col md={4}>
+            <FormGroup>
+              <Label>User Name</Label>
+              <Input
+                type="text"
+                name="username"
+                onChange={(e) => setUserName(e.currentTarget.value)}
+                value={username}
+              />
+            </FormGroup>
+          </Col>
+          <Col md={4}>
+            <FormGroup>
+              <Label>Password</Label>
+              <Input
+                type="password"
+                name="password"
+                onChange={(e) => setPassword(e.currentTarget.value)}
+                value={password}
+              />
+            </FormGroup>
+          </Col>
+          <Col md={4}>
+            <FormGroup>
+              <Label>Profile </Label>
+              <Input
+                type="text"
+                name="profile"
+                onChange={(e) => setProfile(e.currentTarget.value)}
+                value={profile}
+              />
+            </FormGroup>
+          </Col>
+        </Row>
+
+        <Row form>
+          <Col md={6}>
+            <FormGroup>
+              <Label>Legal Entity Name </Label>
+              <Input
+                type="text"
+                name="legalEntityName"
+                onChange={(e) => setLegalEntityName(e.currentTarget.value)}
+                value={legalEntityName}
+              />
+            </FormGroup>
+          </Col>
+          <Col md={4}>
+            <FormGroup>
+              <Label>Industry </Label>
+              <Input
+                type="text"
+                name="industry"
+                onChange={(e) => setIndustry(e.currentTarget.value)}
+                value={industry}
+              />
+            </FormGroup>
+          </Col>
+        </Row>
+        <FormGroup>
+          <Label>Legal Entity Logo URL </Label>
+          <Input
             type="text"
             name="legalEntityLogoURL"
             onChange={(e) => setLogoUri(e.currentTarget.value)}
             value={logoUri}
           />
-        </label>
-        <label>
-          Data Recipient Product:
-          <input
-            type="text"
-            name="dataRecipientProduct"
-            onChange={(e) => setDataRecipientProduct(e.currentTarget.value)}
-            value={dataRecipientProduct}
-          />
-        </label>{" "}
-        <label>
-          Data Recipient Product Description:
-          <input
+        </FormGroup>
+        <Col md={6}>
+          <FormGroup>
+            <Label>Data Recipient Product </Label>
+            <Input
+              type="text"
+              name="dataRecipientProduct"
+              onChange={(e) => setDataRecipientProduct(e.currentTarget.value)}
+              value={dataRecipientProduct}
+            />
+          </FormGroup>
+        </Col>
+        <FormGroup>
+          <Label>Data Recipient Product Description </Label>
+          <Input
             type="text"
             name="dataRecipientProductDescription"
             onChange={(e) =>
@@ -117,9 +136,10 @@ export function CreateADR(props) {
             }
             value={dataRecipientProductDescription}
           />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    </>
+        </FormGroup>
+
+        <Input type="submit" value="Submit" />
+      </Form>
+    </div>
   );
 }

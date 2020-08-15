@@ -48,17 +48,17 @@ export async function getAPIListing() {
   }
 }
 
-// export async function getAPIListingById(id) {
-//   try {
-//     const getAPIMetadtaResponse = await fetch(`/apimetadata/${id}`, {
-//       method: "GET",
-//       credentials: "same-origin",
-//     });
-//     return await getAPIMetadtaResponse.json();
-//   } catch (error) {
-//     console.log("user login submit", error);
-//   }
-// }
+export async function getAPIListingById(id) {
+  try {
+    const getAPIListingByIdRes = await fetch(`/apimetadata/${id}`, {
+      method: "GET",
+      credentials: "same-origin",
+    });
+    return await getAPIListingByIdRes.json();
+  } catch (error) {
+    console.log("user login submit", error);
+  }
+}
 // export async function getADR() {
 //   try {
 //     const getAPIMetadtaResponse = await fetch("/apimetadata", {

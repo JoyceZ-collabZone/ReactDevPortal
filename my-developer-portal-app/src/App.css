@@ -36,3 +36,51 @@
     transform: rotate(360deg);
   }
 }
+
+.textColour {
+  color: #cccccc;
+}
+body {
+  margin: 0;
+  height: 100vh;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  background-color: #0c0b0b;
+  background: url("./assets/5-changes-shaping-the-future-of-learning-technology.jpg")
+    no-repeat center center scroll;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.fixed-top {
+  color: whitesmoke;
+  position: fixed;
+  top: 50px;
+  right: 0;
+  left: 20px;
+  z-index: 1030;
+  text-align: top;
+}
+.jumbo {
+  margin: 100px;
+  background-color: black !important;
+  text-align: center;
+}
+.jumboP {
+  color: white;
+  padding: "10px";
+  font-family: "Arial";
+}
+.fixFormat {
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 60px;
+}

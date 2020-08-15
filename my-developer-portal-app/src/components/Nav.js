@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { UserListingPage } from "./UserContainer";
 import { RedocStandalone } from "redoc";
 import {
+  Button,
   Collapse,
   Navbar,
   NavbarToggler,
@@ -18,6 +19,7 @@ import {
   DropdownItem,
   NavbarText,
 } from "reactstrap";
+import Jumbo from "./Jumbotran";
 
 function NavComp(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,27 +33,38 @@ function NavComp(props) {
   return (
     <React.Fragment>
       <div>
-        <Navbar color="light" light expand="md">
+        <Navbar color="dark" white expand="xl" className="fixed-top">
           {/* <NavbarBrand>Open Banking Dev Portal Register</NavbarBrand> */}
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
+                <NavLink tag={Link} to="/">
+                  <Button color="success">Home</Button>
+                </NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink tag={Link} to="/register/user">
-                  Developer Registration
+                  <Button color="success">Developer Registration</Button>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} to="/register/admin">
-                  Admin Registration
+                  <Button color="success">Admin Registration</Button>
                 </NavLink>
               </NavItem>
+
               <NavItem>
                 {!props.beforeSignInState && (
                   <NavLink tag={Link} to="/login">
-                    Login
+                    <Button color="success"> Login</Button>
                   </NavLink>
                 )}
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to="/APIMetadata/5f2e06043a8c4409ecff1407">
+                  <Button color="success"> Public API</Button>
+                </NavLink>
               </NavItem>
             </Nav>
             {props.beforeSignInState && (

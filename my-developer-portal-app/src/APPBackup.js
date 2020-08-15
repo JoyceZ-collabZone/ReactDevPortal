@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
-import {
-  Badge,
-  Jumbotron,
-  Button,
-  Breadcrumb,
-  BreadcrumbItem,
-} from "reactstrap";
+import { Badge, Jumbotron, Button } from "reactstrap";
 import Jumbo from "./components/Jumbotran";
 import "./App.css";
 import {
@@ -26,12 +20,11 @@ import { UserContainer } from "./components/UserContainer";
 import { APIContainer } from "./components/APIContainer";
 import Home from "./components/Home";
 
-import NavComp from "./components/Nav";
+import Nav from "./components/Nav";
 import AddADR from "./components/AddADR";
 import EditADR from "./components/EditADR";
 import ADRHome from "./components/ADRHome";
 import AddDev from "./components/AddDeveloper";
-
 // import { APIContainer } from "./components/APIContainer";
 
 // function to check if user is logged and reused across all routes
@@ -56,7 +49,7 @@ function App() {
       <Row>
         <Col>
           <Router>
-            <NavComp />
+            <Jumbo />
 
             <Switch>
               <Route path="/login">
@@ -73,10 +66,10 @@ function App() {
               <Route path="/APIMetadata" exact={true}>
                 {initialSignInState && <APIContainer />}
               </Route>
-              {/* 
+
               <Route path="/user">
                 <userRefreshUserListing />
-              </Route> */}
+              </Route>
               <Route path="/APIMetadata/:swaggerId">
                 <SwaggerDefinition />
               </Route>
@@ -91,9 +84,6 @@ function App() {
               </Route>
               <Route path="/register/user/">
                 <AddDev />
-              </Route>
-              <Route path="/">
-                <Jumbo />
               </Route>
             </Switch>
           </Router>
