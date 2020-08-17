@@ -10,7 +10,8 @@ function ScreenMessage(props) {
     <React.Fragment>
       {props.ADRSubmitMsg.msg.length > 0 && (
         <React.Fragment>
-          <h1 style={{ color: "red" }}>{props.ADRSubmitMsg.msg}</h1>
+          <h2 className="titleColour">{props.ADRSubmitMsg.msg}</h2>
+
           {props.ADRSubmitMsg.state && (
             <Link to={"/register/all"}>
               <button>View ADR List</button>

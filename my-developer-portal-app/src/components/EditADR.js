@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getADRById, updateADRById } from "../api";
 import { CreateADR } from "./CreateADR";
-import ScreenMessage from "./MessagePage";
+import ScreenMessage from "./ScreenMessage";
 function EditADR() {
   const [ADRSubmitMsg, setADRSubmitMsg] = useState({ msg: "", state: false });
   const [redirectHome, setRedirectHome] = useState(false); // boolean hook

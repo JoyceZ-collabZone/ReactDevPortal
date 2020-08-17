@@ -101,3 +101,14 @@ body {
 .navBar {
   margin-bottom: 120px;
 }
+.gapInButton {
+  margin-left: 20px;
+  margin-right: auto;
+}
+.liColour {
+  font-size: x-large;
+  color: azure;
+  font-weight: 400;
+  font: bold;
+  background-color: black;
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CreateADR } from "./CreateADR";
 import { addADRAPICall } from "../api";
-import ScreenMessage from "./MessagePage";
+import ScreenMessage from "./ScreenMessage";
 function AddADR() {
   const [ADRSubmitMsg, setADRSubmitMsg] = useState({ msg: "", state: false });
   const [redirectHome, setRedirectHome] = useState(false); // boolean hook

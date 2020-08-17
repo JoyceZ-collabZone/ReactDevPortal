@@ -8,12 +8,14 @@ b) Fintech Adminonboarding
 2 User authentication
 a) developer sign in
 b) Fintech sign in
-c) staff sign in
+
+<!-- c) staff sign in -->
 
 3 User Log out
 a) developer log out
 b) Fintech logout
-c) staff log out
+
+<!-- c) staff log out -->
 
 4 Get / Search ADR by Id
 a) ADR

@@ -66,17 +66,23 @@ function NavComp(props) {
                 <Button color="success"> Public API</Button>
               </NavLink>
             </NavItem>
+            {props.beforeSignInState && (
+              <NavItem>
+                <NavLink tag={Link} to="/APIMetadata/">
+                  <Button color="success"> API Swagger Definition</Button>
+                </NavLink>
+              </NavItem>
+            )}
+
+            {props.beforeSignInState && (
+              <NavItem>
+                <NavLink to="/logout" onClick={handleUserClickLogout}>
+                  <Button color="success"> Logout</Button>
+                </NavLink>
+              </NavItem>
+            )}
           </Nav>
-          {props.beforeSignInState && (
-            <NavItem>
-              <Link to="/APIMetadata">API Definition</Link>
-            </NavItem>
-          )}
-          {props.beforeSignInState && (
-            <Link to="/logout" onClick={handleUserClickLogout}>
-              Logout
-            </Link>
-          )}
+
           {/* </Collapse> */}
         </Navbar>
       </div>

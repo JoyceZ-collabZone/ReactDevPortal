@@ -30,7 +30,7 @@ function ADRHome() {
   };
   return (
     <React.Fragment>
-      <h2>Home works</h2>
+      <h2 className="titleColour"> ADR registered</h2>
       <ADRList
         getADRResult={ADRListing}
         editADR={editADR}
