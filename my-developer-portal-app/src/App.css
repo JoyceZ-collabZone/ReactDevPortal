@@ -55,9 +55,8 @@ body {
   background-color: #0c0b0b;
   background: url("./assets/5-changes-shaping-the-future-of-learning-technology.jpg")
     no-repeat center center scroll;
-  background-position: center;
-  background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
 }
 .fixed-top {
   color: whitesmoke;
@@ -83,4 +82,22 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 60px;
+}
+.formContainer,
+.redoc-wrap {
+  margin-top: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 60px;
+  background-color: white;
+}
+.titleColour {
+  color: green;
+}
+.formContainer {
+  padding: 30px;
+  width: 60%;
+}
+.navBar {
+  margin-bottom: 120px;
 }

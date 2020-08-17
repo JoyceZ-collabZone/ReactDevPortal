@@ -48,7 +48,7 @@ const isUserLoggedIn = () => {
 //
 
 function App() {
-  const [initialSignInState, setSignInState] = useState(isUserLoggedIn);
+  const [initialSignInState, setSignInState] = useState(isUserLoggedIn());
   console.log("logging setSignInState", setSignInState);
 
   return (
@@ -56,7 +56,10 @@ function App() {
       <Row>
         <Col>
           <Router>
-            <NavComp />
+            <NavComp
+              beforeSignInState={initialSignInState}
+              afterLogoutState={setSignInState}
+            />
 
             <Switch>
               <Route path="/login">

@@ -28,7 +28,7 @@ export function APIList(props) {
 
   return (
     <div>
-      <Row>
+      <Row className="apiContainer">
         {props.metadataStateProperty.map((eachAPI) => {
           return (
             <Col sm="6" className="mb-3">

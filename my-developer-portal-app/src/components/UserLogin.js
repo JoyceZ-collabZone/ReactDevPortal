@@ -61,7 +61,7 @@ export function LoginHomePage(props) {
     <>
       {errorMessage.length > 0 && <h1>{errorMessage}</h1>}
 
-      <Form onSubmit={handleUserFormSubmit}>
+      <Form onSubmit={handleUserFormSubmit} className="formContainer">
         {/* <FormGroup>
         <Label>Sign in</Label>
       </FormGroup> */}
@@ -99,9 +99,13 @@ export function LoginHomePage(props) {
             the privacy policy
           </Label>
         </FormGroup>
-        <Button type="submit" value="Submit">
+        <button
+          type="submit"
+          value="Submit"
+          className="btn btn-small btn-success"
+        >
           Submit
-        </Button>
+        </button>
       </Form>
     </>
   );

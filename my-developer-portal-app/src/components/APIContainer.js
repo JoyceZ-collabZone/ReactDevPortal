@@ -15,7 +15,7 @@ export function APIContainer() {
 
   return (
     <React.Fragment>
-      <h1>this is API listing container</h1>
+      <h1 className="titleColour">Welcome to Open Banking APIs</h1>
       <APIList metadataStateProperty={Metadata} />
     </React.Fragment>
   );

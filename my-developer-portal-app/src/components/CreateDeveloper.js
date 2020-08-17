@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap";
+import {
+  Col,
+  Row,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Alert,
+} from "reactstrap";
+
 export function CreateDev(props) {
   const [username, setUserName] = useState(props.addDevResult.username);
   const [password, setPassword] = useState(props.addDevResult.password);
@@ -20,42 +30,51 @@ export function CreateDev(props) {
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
-        <h2>{props.pageTitle}</h2>
+      <Form onSubmit={handleSubmit} className="formContainer">
+        <h2 className="titleColour">{props.pageTitle}</h2>
+        {props.successMessage && (
+          <Alert variant="success">{props.successMessage}</Alert>
+        )}
         <FormGroup>
-          <Label>
-            User Name
-            <Input
-              type="text"
-              name="username"
-              onChange={(e) => setUserName(e.currentTarget.value)}
-              value={username}
-            />
-          </Label>
+          <Label>User Name</Label>
+          <Input
+            type="text"
+            name="username"
+            onChange={(e) => setUserName(e.currentTarget.value)}
+            value={username}
+          />
         </FormGroup>
         <FormGroup>
-          <Label>
-            Password
-            <Input
-              type="password"
-              name="password"
-              onChange={(e) => setPassword(e.currentTarget.value)}
-              value={password}
-            />
-          </Label>
+          <Label>Password </Label>
+          <Input
+            type="password"
+            name="password"
+            onChange={(e) => setPassword(e.currentTarget.value)}
+            value={password}
+          />
         </FormGroup>
         <FormGroup>
-          <Label>
-            Profile:
-            <Input
-              type="text"
-              name="profile"
-              onChange={(e) => setProfile(e.currentTarget.value)}
-              value={profile}
-            />
+          <Label>Profile </Label>
+          <Input
+            type="text"
+            name="profile"
+            onChange={(e) => setProfile(e.currentTarget.value)}
+            value={profile}
+          />
+        </FormGroup>
+        <FormGroup check>
+          <Label check>
+            <Input type="checkbox" /> I agree to the terms and conditions and
+            the privacy policy
           </Label>
         </FormGroup>
-        <Input type="submit" value="Submit" />
+        <button
+          type="submit"
+          value="Submit"
+          className="btn btn-small btn-success"
+        >
+          Submit
+        </button>
       </Form>
     </>
   );

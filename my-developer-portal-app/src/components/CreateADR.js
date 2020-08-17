@@ -44,7 +44,7 @@ export function CreateADR(props) {
 
   return (
     <div className="formContainer">
-      <h2 >{props.pageTitle}</h2>
+      <h2 className="titleColour">{props.pageTitle}</h2>
       <Form onSubmit={handleSubmit}>
         <Row form>
           <Col md={4}>
@@ -115,17 +115,17 @@ export function CreateADR(props) {
             value={logoUri}
           />
         </FormGroup>
-        <Col md={6}>
-          <FormGroup>
-            <Label>Data Recipient Product </Label>
-            <Input
-              type="text"
-              name="dataRecipientProduct"
-              onChange={(e) => setDataRecipientProduct(e.currentTarget.value)}
-              value={dataRecipientProduct}
-            />
-          </FormGroup>
-        </Col>
+
+        <FormGroup>
+          <Label>Data Recipient Product </Label>
+          <Input
+            type="text"
+            name="dataRecipientProduct"
+            onChange={(e) => setDataRecipientProduct(e.currentTarget.value)}
+            value={dataRecipientProduct}
+          />
+        </FormGroup>
+
         <FormGroup>
           <Label>Data Recipient Product Description </Label>
           <Input
@@ -137,8 +137,19 @@ export function CreateADR(props) {
             value={dataRecipientProductDescription}
           />
         </FormGroup>
-
-        <Input type="submit" value="Submit" />
+        <FormGroup check>
+          <Label check>
+            <Input type="checkbox" /> I agree to the terms and conditions and
+            the privacy policy
+          </Label>
+        </FormGroup>
+        <button
+          type="submit"
+          value="Submit"
+          className="btn btn-small btn-success"
+        >
+          Submit
+        </button>
       </Form>
     </div>
   );

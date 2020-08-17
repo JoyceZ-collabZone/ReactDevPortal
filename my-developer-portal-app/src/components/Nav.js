@@ -32,52 +32,52 @@ function NavComp(props) {
 
   return (
     <React.Fragment>
-      <div>
-        <Navbar color="dark" white expand="xl" className="fixed-top">
+      <div className="navBar">
+        <Navbar color="dark" white expand="xs" className="fixed-top">
           {/* <NavbarBrand>Open Banking Dev Portal Register</NavbarBrand> */}
-          <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className="mr-auto" navbar>
-              <NavItem>
-                <NavLink tag={Link} to="/">
-                  <Button color="success">Home</Button>
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/register/user">
-                  <Button color="success">Developer Registration</Button>
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/register/admin">
-                  <Button color="success">Admin Registration</Button>
-                </NavLink>
-              </NavItem>
+          {/* <NavbarToggler onClick={toggle} /> */}
+          {/* <Collapse isOpen={isOpen} navbar> */}
+          <Nav className="mr-auto" navbar>
+            <NavItem>
+              <NavLink tag={Link} to="/">
+                <Button color="success">Home</Button>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={Link} to="/register/user">
+                <Button color="success">Developer Registration</Button>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={Link} to="/register/admin">
+                <Button color="success">Admin Registration</Button>
+              </NavLink>
+            </NavItem>
 
-              <NavItem>
-                {!props.beforeSignInState && (
-                  <NavLink tag={Link} to="/login">
-                    <Button color="success"> Login</Button>
-                  </NavLink>
-                )}
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/APIMetadata/5f2e06043a8c4409ecff1407">
-                  <Button color="success"> Public API</Button>
+            <NavItem>
+              {!props.beforeSignInState && (
+                <NavLink tag={Link} to="/login">
+                  <Button color="success"> Login</Button>
                 </NavLink>
-              </NavItem>
-            </Nav>
-            {props.beforeSignInState && (
-              <NavItem>
-                <Link to="/APIMetadata">API Definition</Link>
-              </NavItem>
-            )}
-            {props.beforeSignInState && (
-              <Link to="/logout" onClick={handleUserClickLogout}>
-                Logout
-              </Link>
-            )}
-          </Collapse>
+              )}
+            </NavItem>
+            <NavItem>
+              <NavLink tag={Link} to="/APIMetadata/5f2e06043a8c4409ecff1407">
+                <Button color="success"> Public API</Button>
+              </NavLink>
+            </NavItem>
+          </Nav>
+          {props.beforeSignInState && (
+            <NavItem>
+              <Link to="/APIMetadata">API Definition</Link>
+            </NavItem>
+          )}
+          {props.beforeSignInState && (
+            <Link to="/logout" onClick={handleUserClickLogout}>
+              Logout
+            </Link>
+          )}
+          {/* </Collapse> */}
         </Navbar>
       </div>
     </React.Fragment>

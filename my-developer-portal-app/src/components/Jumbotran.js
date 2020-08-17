@@ -45,7 +45,10 @@ function Jumbo() {
                 <div>
                   <h1>
                     <Link to="/APIMetadata">
-                      <Button color="success"> Explore Our APIs</Button>
+                      <Button color="success">
+                        {" "}
+                        Explore Our APIs After Sign In
+                      </Button>
                     </Link>
                   </h1>
                 </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { CreateDev } from "./CreateDeveloper";
 import { addDevAPICall } from "../api";
 
@@ -20,11 +21,11 @@ function AddDev() {
   return (
     <React.Fragment>
       <CreateDev
+        successMessage={devMessage}
         submitHandler={addDevHandler}
         pageTitle={"Developer Registration"}
         addDevResult={DevForm}
       />
-      {devMessage && <h1>{devMessage}</h1>}
     </React.Fragment>
   );
 }
