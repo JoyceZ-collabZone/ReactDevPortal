@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { RedocStandalone } from "redoc";
 import {
   Card,
@@ -14,13 +14,17 @@ import {
 export function APIList(props) {
   const [buttonClicked, setButtonClicked] = useState(false);
   const history = useHistory();
+  const params = useParams();
+  console.log("logging params in API list", params);
+
   console.log("button", buttonClicked);
-  const navigateTo = (swaggerId, swagger) => {
-    history.push({
-      pathname: `/APIMetadata/${swaggerId}`,
-      state: { swagger },
-    });
-  };
+  // const navigateTo = (swaggerId, swagger) => {
+  //   console.log("logging swagger ", swagger);
+  //   history.push({
+  //     pathname: `/APIMetadata/${swaggerId}`,
+  //     state: { swagger },
+  //   });
+  // };
 
   return (
     <div>
@@ -31,12 +35,20 @@ export function APIList(props) {
               <Card key={eachAPI._id} body>
                 <CardTitle>Category: {eachAPI.category}</CardTitle>
                 <CardText>Description: {eachAPI.description}</CardText>
-                <Button
-                  onClick={(event) => navigateTo(eachAPI._id, eachAPI.Swagger)}
-                >
-                  Go To Swagger Definition
-                </Button>
-                {buttonClicked && <RedocStandalone spec={eachAPI.Swagger} />}
+                <Link to={`/APIMetadata/${eachAPI._id}`}>
+                  <Button> Swagger Definition</Button>
+                </Link>
+
+                {/* {<Button
+                    onClick={(event) =>
+                      navigateTo(eachAPI._id, eachAPI.Swagger)
+                    }
+                  >
+                    Go To Swagger Definition
+                  </Button>
+                </Link>} */}
+                {/* {buttonClicked && <RedocStandalone spec={eachAPI.Swagger} />} */}
+                {/* {buttonClicked && <RedocStandalone spec={eachAPI.Swagger} />} */}
                 <CardFooter>Scope: {eachAPI.scope}</CardFooter>
               </Card>
             </Col>

@@ -4,6 +4,13 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
+import WebFont from "webfontloader";
+
+WebFont.load({
+  google: {
+    families: ["Titillium Web:300,400,700", "sans-serif"],
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>

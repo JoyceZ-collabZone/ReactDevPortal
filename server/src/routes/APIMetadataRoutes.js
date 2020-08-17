@@ -9,6 +9,7 @@ apiRouterMiddleware.get("/", async (request, response) => {
 });
 
 apiRouterMiddleware.get("/:id", async (request, response) => {
+  console.log("logging api id ", request.params.id);
   const oneapiResponseDoc = await apimetadatamodel.findOne({
     _id: request.params.id,
   });

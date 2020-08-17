@@ -18,7 +18,8 @@
     "react-scripts": "3.4.1",
     "reactstrap": "^8.5.1",
     "redoc": "^2.0.0-rc.35",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
     "start": "react-scripts start",

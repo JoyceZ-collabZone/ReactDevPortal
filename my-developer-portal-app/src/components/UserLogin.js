@@ -66,7 +66,7 @@ export function LoginHomePage(props) {
         <Label>Sign in</Label>
       </FormGroup> */}
         <FormGroup>
-          <Label>Username:</Label>
+          <Label>Username</Label>
           <Input
             type="text"
             name="username"
@@ -75,7 +75,7 @@ export function LoginHomePage(props) {
           />
         </FormGroup>
         <FormGroup>
-          <Label>Password:</Label>
+          <Label>Password</Label>
           <Input
             type="password"
             name="password"

@@ -1,0 +1,142 @@
+body {
+  margin: 0;
+  height: 100vh;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  background-color: #0c0b0b;
+  background: url("./5-changes-shaping-the-future-of-learning-technology.jpg")
+    no-repeat center center scroll;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 60px;
+  margin-inline-end: 60px;
+  font-size: medium;
+  color: blue;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+#userform {
+  background-color: aqua;
+}
+
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  color: blue;
+  text-align: center;
+}
+
+h3 {
+  display: block;
+  font-size: 3em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  color: blue;
+  text-align: center;
+}
+
+.apiSearchId {
+  text-align: right;
+}
+
+.dropbtn {
+  background-color: blue;
+  color: white;
+  padding: 16px;
+  font-size: 20px;
+  border: none;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.navbar {
+  width: 100%;
+  background-color: #000;
+  overflow: auto;
+}
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: goldenrod;
+}
+
+.active {
+  background-color: lightblue;
+}
+
+.center {
+  margin-top: 70px;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.sidenav {
+  height: 100%;
+  /* Full-height: remove this if you want "auto" height */
+  /* Set the width of the sidebar */
+  position: fixed;
+  /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1;
+  /* Stay on top */
+  top: 0;
+  /* Stay at the top */
+  left: 0;
+  background-color: #111;
+  /* Black */
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
+  padding-top: 20px;
+  color: black;
+}
+/* The navigation menu links */
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+/* When you mouse over the navigation links, change their color */
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+#topBody {
+  background: rgba(255, 255, 255, 0.2);
+  min-height: 100%;
+  position: relative;
+}
