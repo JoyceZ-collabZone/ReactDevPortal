@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { CreateADR } from "./CreateADR";
-import { addADRAPICall } from "../api";
+import { CreateSP } from "./CreateSP";
+import { call_addADR } from "../api";
 import ScreenMessage from "./ScreenMessage";
-function AddADR() {
+function AddSP() {
   const [ADRSubmitMsg, setADRSubmitMsg] = useState({ msg: "", state: false });
   const [redirectHome, setRedirectHome] = useState(false); // boolean hook
 
   const addADRHandler = async (ADRInputDetails) => {
     try {
-      const addADRResult = await addADRAPICall(ADRInputDetails);
-      console.log(addADRResult);
+      const addADRResult = await call_addADR(ADRInputDetails);
+      console.log("logging add SP result in react route ", addADRResult);
       setADRSubmitMsg({
-        msg: "Congratulations, ADR has been registered successfully",
+        msg: "Congratulations, software product has been added successfully",
         state: true,
       });
     } catch (error) {
-      console.log("logging add ADR error", error);
+      console.log("logging add SP error", error);
       setADRSubmitMsg({
         msg: "Sorry, please try later, something went wrong",
         state: false,
@@ -24,17 +24,17 @@ function AddADR() {
   };
   return (
     <React.Fragment>
-      <CreateADR
-        submitHandler={addADRHandler}
-        pageTitle={"ADR Registration"}
-        getByIDAResult={""}
+      <CreateSP
+        SubmitHandler={addADRHandler}
+        PageTitle={"Software Product Registration"}
+        ADRCreateOrEdit={""}
       />
       <ScreenMessage
         ADRSubmitMsg={ADRSubmitMsg}
-        setRedirectHome={setRedirectHome}
+        // redirectHome={setRedirectHome}
         // redirectHome={redirectHome}
       />
     </React.Fragment>
   );
 }
-export default AddADR;
+export default AddSP;

@@ -1,93 +1,76 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
+import Button from "@material-ui/core/Button";
 
-// import { userRefreshUserListing } from "../api";
-import { UserListingPage } from "./UserContainer";
 import { RedocStandalone } from "redoc";
-import {
-  Button,
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-} from "reactstrap";
-import Jumbo from "./Jumbotran";
+import Logout from "./Logout";
 
-function NavComp(props) {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+// import { UserListingPage } from "./UserContainer";
 
+export default function Nav(props) {
   const handleUserClickLogout = () => {
-    window.localStorage.removeItem("token");
-    props.afterLogoutState(false); // set loggedin to false
+    window.sessionStorage.removeItem("token");
+    props.loggedInState(false); // set loggedin to false
+    props.loggedInUser("");
+    props.setScreenMessage({
+      message: `You have successfully logged out`,
+      state: true,
+    });
   };
 
   return (
-    <React.Fragment>
-      <div className="navBar">
-        <Navbar color="dark" white expand="xs" className="fixed-top">
-          {/* <NavbarBrand>Open Banking Dev Portal Register</NavbarBrand> */}
-          {/* <NavbarToggler onClick={toggle} /> */}
-          {/* <Collapse isOpen={isOpen} navbar> */}
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <NavLink tag={Link} to="/">
-                <Button color="success">Home</Button>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/register/user">
-                <Button color="success">Developer Registration</Button>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/register/admin">
-                <Button color="success">Admin Registration</Button>
-              </NavLink>
-            </NavItem>
+    <Breadcrumbs aria-label="breadcrumb">
+      <Link to="/home">
+        <Button variant="contained" color="secondary">
+          Home
+        </Button>
+      </Link>
+      <Link to="/register/user">
+        <Button variant="contained" color="secondary">
+          User Signup
+        </Button>
+      </Link>
+      <Link to="/user/login">
+        <Button variant="contained" color="secondary">
+          Login
+        </Button>
+      </Link>
+      <Link to="/docupload">
+        <Button variant="contained" color="secondary">
+          Upload Swagger
+        </Button>
+      </Link>
 
-            <NavItem>
-              {!props.beforeSignInState && (
-                <NavLink tag={Link} to="/login">
-                  <Button color="success"> Login</Button>
-                </NavLink>
-              )}
-            </NavItem>
-            <NavItem>
-              <NavLink tag={Link} to="/APIMetadata/5f2e06043a8c4409ecff1407">
-                <Button color="success"> Public API</Button>
-              </NavLink>
-            </NavItem>
-            {props.beforeSignInState && (
-              <NavItem>
-                <NavLink tag={Link} to="/APIMetadata/">
-                  <Button color="success"> API Swagger Definition</Button>
-                </NavLink>
-              </NavItem>
-            )}
+      <Link to="/software/new">
+        <Button variant="contained" color="secondary">
+          Software Product Registration
+        </Button>
+      </Link>
+      <Link to="/softwares/all">
+        <Button variant="contained" color="secondary">
+          View All Software Product
+        </Button>
+      </Link>
 
-            {props.beforeSignInState && (
-              <NavItem>
-                <NavLink to="/logout" onClick={handleUserClickLogout}>
-                  <Button color="success"> Logout</Button>
-                </NavLink>
-              </NavItem>
-            )}
-          </Nav>
-
-          {/* </Collapse> */}
-        </Navbar>
-      </div>
-    </React.Fragment>
+      {/* <NavLink tag={Link} to="/APIMetadata/5f2e06043a8c4409ecff1407">
+        <Button color="success"> Public API</Button>
+      </NavLink> */}
+      {props.loggedInState && (
+        <Link to="/APIMetadata/">
+          <Button variant="contained" color="secondary">
+            API Swagger Definition
+          </Button>
+        </Link>
+      )}
+      {props.loggedInState && (
+        <Link to="/logout" onClick={handleUserClickLogout}>
+          <Button variant="contained" color="secondary">
+            Logout
+          </Button>
+        </Link>
+      )}
+    </Breadcrumbs>
   );
 }
-
-export default NavComp;

@@ -13,7 +13,7 @@ function ScreenMessage(props) {
           <h2 className="titleColour">{props.ADRSubmitMsg.msg}</h2>
 
           {props.ADRSubmitMsg.state && (
-            <Link to={"/register/all"}>
+            <Link to={"/softwares/all"}>
               <button>View ADR List</button>
             </Link>
           )}

@@ -1,23 +1,38 @@
 //common headers
 const commonFetchRequestHeaders = {
   "Content-Type": "application/json",
-  "Request-header-token": window.localStorage.getItem("token"),
+  requestTokenHeader: window.sessionStorage.getItem("token"),
 };
-export async function userSubmitSigninHandler(formUserInputData) {
+
+export function updateHeaderOptions() {
+  console.log("updating token for API requests"); //called whenever user login
+  commonFetchRequestHeaders = {
+    "Content-Type": "application/json",
+    requestTokenHeader: window.sessionStorage.getItem("token"),
+  };
+}
+
+export async function SignInCall(apiSignInRequest) {
   // submit handler is async, can use await and .then
+  console.log(
+    "logging signInRequest to node.js backend api ",
+    apiSignInRequest
+  );
   try {
     const response = await fetch("/user/login", {
       method: "POST",
       credentials: "same-origin",
-      headers: commonFetchRequestHeaders,
-      body: JSON.stringify(formUserInputData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(apiSignInRequest),
     });
-
-    const extractedTokenFromResponse = response.headers.get(
-      "Login-Response-Token-Header"
-    ); // fetch api documentation
-    console.log("response token", extractedTokenFromResponse);
-    return extractedTokenFromResponse;
+    console.log("logging fetch api node.js signInResponse ", response);
+    console.log(
+      "response token from login fetch api call",
+      response.headers.get("responseToken")
+    );
+    return response.headers.get("responseToken");
   } catch (error) {
     console.log("user login submit", error);
   }
@@ -71,16 +86,17 @@ export async function getAPIListingById(id) {
 //   }
 // }
 
-export async function getADRs() {
+export async function call_getADRs() {
   const result = await fetch("/ADRMetadata", {
     headers: commonFetchRequestHeaders,
   });
+  console.log("logging fetch api/getADRs reslut ", result);
   const ADRResponse = await result.json();
-
+  console.log("logging fetch api/getADRs ADRResponse ", ADRResponse);
   return ADRResponse;
 }
 
-export async function getADRById(id) {
+export async function call_getADRById(id) {
   const result = await fetch("/ADRMetadata/" + id, {
     headers: commonFetchRequestHeaders,
   });
@@ -89,7 +105,7 @@ export async function getADRById(id) {
   return getADRByIdResponse;
 }
 
-export async function updateADRById(id, ADRDetails) {
+export async function call_updateADRById(id, ADRDetails) {
   const result = await fetch(`/ADRMetadata/update/${id}`, {
     method: "PATCH",
     body: JSON.stringify(ADRDetails),
@@ -99,7 +115,7 @@ export async function updateADRById(id, ADRDetails) {
   return editADRByIdResponse;
 }
 
-export async function addADRAPICall(ADRInputDetails) {
+export async function call_addADR(ADRInputDetails) {
   const result = await fetch("/ADRMetadata/new", {
     method: "POST",
     body: JSON.stringify(ADRInputDetails),
@@ -110,24 +126,47 @@ export async function addADRAPICall(ADRInputDetails) {
   return addADRResponse;
 }
 
-export async function deleteADRAPICall(id) {
+export async function call_deleteADR(id) {
   const result = await fetch(`/ADRMetadata/delete/${id}`, {
     method: "DELETE",
 
     headers: commonFetchRequestHeaders,
   });
-  const addADRResponse = await result.json();
+  const deleteADRResponse = await result.json();
 
-  return addADRResponse;
+  return deleteADRResponse;
 }
 
-export async function addDevAPICall(DevInputDetails) {
+export async function createUserCall(userInput) {
   const result = await fetch("/user/new", {
     method: "POST",
-    body: JSON.stringify(DevInputDetails),
+    body: JSON.stringify(userInput),
     headers: commonFetchRequestHeaders,
   });
-  const addDevResponse = await result.json();
+  const createUserResponse = await result.json();
+  return createUserResponse;
+}
 
-  return addDevResponse;
+export async function createSwaggerAPICall(userInput) {
+  const result = await fetch("/apimetadata/new", {
+    method: "POST",
+    body: JSON.stringify(userInput),
+    headers: commonFetchRequestHeaders,
+  });
+  const createSwaggerResponse = await result.json();
+  return createSwaggerResponse;
+}
+
+export async function call_uploadFile(fileInput) {
+  const result = await fetch("/apimetadata/upload", {
+    method: "POST",
+    body: JSON.stringify(fileInput),
+    headers: commonFetchRequestHeaders,
+  });
+  const docUploadResponse = await result.json();
+  console.log(
+    "logging doc upload response in fetch api call",
+    docUploadResponse
+  );
+  return docUploadResponse;
 }

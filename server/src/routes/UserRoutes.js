@@ -26,50 +26,52 @@ userRouterMiddleware.post("/new", async (request, response) => {
 
 userRouterMiddleware.post("/login", async (request, response) => {
   try {
-    const returnedUserDocFromUserModel = await UserModel.findOne({
-      username: request.body.username,
-      profile: request.body.profile,
+    const foundUser = await UserModel.findOne({
+      email: request.body.email,
     });
+    console.log("logging request to backend ", request);
+    console.log("logging found user from backend ", foundUser);
 
     let status = 400;
     let message = "user failed to log in, please try again";
 
     if (
-      returnedUserDocFromUserModel &&
-      (await bcrypt.compare(
-        request.body.password,
-        returnedUserDocFromUserModel.password
-      ))
+      foundUser &&
+      (await bcrypt.compare(request.body.password, foundUser.password))
     ) {
       // create a signed jwt for the user, if both user name and password correct
       const loggedInUserInfo = {
-        id: returnedUserDocFromUserModel._id,
-        user: returnedUserDocFromUserModel.username,
+        id: foundUser._id,
+        firstName: foundUser.firstName,
+        email: foundUser.email,
+        role: foundUser.role,
       };
-
+      console.log("logging loggedIn user info from backend", loggedInUserInfo);
       const options = {
         algorithm: "HS256",
         expiresIn: "7d",
         audience: "myDeveloperPortal",
         issuer: "nodeJSLibrary",
-        subject: loggedInUserInfo.user,
+        subject: loggedInUserInfo.firstName,
       };
+      console.log("logging options ", options);
 
-      jwt.sign(loggedInUserInfo, secretKey, options, (error, token) => {
-        response.set("Login-Response-Token-Header", token);
+      jwt.sign(loggedInUserInfo, secretKey, options, (err, token) => {
+        console.log("logging token", token);
+        response.set("responseToken", token);
         status = 200;
-        message = "login is successful";
+        message = "User is successfully logged in";
         response.status(status).send(`${message}`);
       });
     } else {
-      request.session.message = "User sign in info incorrect";
+      request.session.message = "Invalid user sign in";
       // response.redirect("/");
 
       response.status(status).send(`${message}`);
     }
   } catch (error) {
     console.log("catch error for user login route ", error);
-    response.status(500).send(`user login failed`);
+    response.status(500).send(`User login failed`);
   }
 });
 

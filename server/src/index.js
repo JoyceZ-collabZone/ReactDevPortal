@@ -1,18 +1,29 @@
 // dependencies
+require("dotenv").config();
+
 const expressAppMiddleware = require("express"); // application level middleware, express is routing and middleware web framework, an express application is series of middleware function calls
 const sessionMiddleware = require("express-session");
+
+let cors = require("cors");
+
 //
 
 require("./mongo"); // database connection and settings
 
 // variables
 
-const portNumber = 9000;
+const isProdEnv = process.env.NODE_ENV === "production";
 
 // setup
 const appWebServer = expressAppMiddleware();
+appWebServer.use(cors()); // open listing, empty cors setting
 
-appWebServer.use(expressAppMiddleware.static("../public"));
+if (isProdEnv) {
+  console.log("express backend running in production, static public");
+  appWebServer.use(expressAppMiddleware.static("/public"));
+}
+
+appWebServer.use(expressAppMiddleware.static("./public"));
 
 // routes import from routes
 
@@ -39,6 +50,15 @@ appWebServer.use("/ADRMetadata", ADRManagementRouter);
 appWebServer.use("/apimetadata", apiRouter);
 // appWebServer.use("/user", SoftwareProductRouter);
 // start web server backend, step 1
+
+if (isProdEnv) {
+  console.log("express backend running in production, send file");
+  appWebServer.use("/*", (request, response) => {
+    response.sendFile("./public/index.html", { root: "./" });
+  });
+}
+
+const portNumber = process.env.PORT || 8000;
 appWebServer.listen(portNumber, () => {
   console.log(`My web server is listening at http://localhost:${portNumber}`);
 });

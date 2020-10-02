@@ -53,7 +53,7 @@ body {
   color: #212529;
   text-align: left;
   background-color: #0c0b0b;
-  background: url("./assets/5-changes-shaping-the-future-of-learning-technology.jpg")
+  background: url("./assets/technology-texture-neon-threads-texture-threads-background-black-background-with-threads-bokeh.jpg")
     no-repeat center center scroll;
   background-size: cover;
   background-attachment: fixed;
@@ -111,4 +111,66 @@ body {
   font-weight: 400;
   font: bold;
   background-color: black;
+}
+.logoutMessage {
+  margin-top: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 60px;
+  width: 800px;
+  height: 200px;
+}
+.makeStyles-paper-1 {
+  background-color: white;
+}
+.makeStyles-form-3 {
+  padding-top: 40px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 60px;
+}
+.MuiTypography-root {
+  margin-top: 70px;
+  margin-left: 50px;
+}
+.MuiPaper-root {
+  color: white;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  background-color: none;
+}
+.makeStyles-paper-2 {
+  display: flex;
+  margin-top: 60px;
+  align-items: center;
+  padding: 40px;
+  flex-direction: column;
+  background-color: white;
+}
+.makeStyles-paper-21 {
+  display: flex;
+  margin-top: 64px;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  padding: 30px;
+}
+/* .MuiCardActions-root {
+  display: flex;
+  padding: 8px;
+  margin-bottom: 200px;
+} */
+
+/* .MuiCardContent-root {
+  padding: 50;
+  margin-top: 50px;
+  margin-bottom: 60px;
+} */
+h2 {
+  display: block;
+  font-size: 1.5em;
+  margin-top: 120px;
+  margin-block-end: 50px;
+  margin-inline-start: 30px;
+  margin-inline-end: 30px;
+  font-weight: bold;
 }

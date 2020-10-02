@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getADRs, deleteADR } from "../api";
-import ADRList from "./ADRList";
+import { call_getADRs, call_deleteADR } from "../api";
+import ADRList from "./ADRList_todelete";
 import { Redirect } from "react-router-dom";
 
 function Home() {
@@ -14,7 +14,7 @@ function Home() {
   }, []);
 
   const refreshADRs = async () => {
-    const getADRResponse = await getADRs();
+    const getADRResponse = await call_getADRs();
     setADRListing(getADRResponse);
   };
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { CreateDev } from "./CreateDeveloper";
-import { addDevAPICall } from "../api";
+import { CreateDev } from "./CreateDeveloper_todelete";
+import { CreateUser } from "../api";
 
 function AddDev() {
   const [DevForm, setDevForm] = useState("");

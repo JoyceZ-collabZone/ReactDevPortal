@@ -2,23 +2,10 @@ const mongoose = require("mongoose");
 
 const profile = ["developer", "ADR admin", "staff"];
 const ADRSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  profile: {
-    type: String,
-    required: true,
-  },
   legalEntityId: {
     type: String,
     required: false,
   },
-
   legalEntityName: {
     type: String,
     required: false,
@@ -31,7 +18,10 @@ const ADRSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-
+  brandName: {
+    type: String,
+    required: false,
+  },
   softwareProductId: {
     type: String,
     required: false,
@@ -45,10 +35,21 @@ const ADRSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  status: {
+    type: String,
+    required: false,
+  },
+  createdBy: {
+    type: String,
+    required: false,
+  },
   lastUpdated: {
     type: String,
     required: false,
   },
+  profile: {
+    type: String,
+    required: false,
+  },
 });
-
 module.exports = mongoose.model("ADRMetadataModel", ADRSchema);

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getAPIListing } from "../api";
-import { APIList } from "./APIList";
+import APIList from "./APIList";
 
-export function APIContainer() {
+function APIContainer() {
   const [Metadata, setMetadata] = useState([]);
 
   useEffect(() => {
@@ -20,3 +20,4 @@ export function APIContainer() {
     </React.Fragment>
   );
 }
+export default APIContainer;

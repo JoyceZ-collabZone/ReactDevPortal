@@ -26,15 +26,9 @@
       "description": "Retrieve a list of NAB products, as well as detailed product information on a single product, which are part of the Open Banking scheme, and are currently openly offered to the market."
     }
   ],
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "servers": [
       {
@@ -50,10 +44,7 @@
         "summary": "CORS support",
         "x-swagstar": {
           "apiAuth": "noAuth",
-          "apiTarget": [
-            "service",
-            "openbank"
-          ],
+          "apiTarget": ["service", "openbank"],
           "plugins": {
             "route-rate-limiting": {
               "second": 10
@@ -81,15 +72,9 @@
             "$ref": "#/parameters/ParamPageSize"
           }
         ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "CORS"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["CORS"],
         "responses": {
           "200": {
             "description": "Default response for CORS method."
@@ -120,10 +105,7 @@
         "operationId": "listProducts",
         "x-swagstar": {
           "apiAuth": "noAuth",
-          "apiTarget": [
-            "service",
-            "openbank"
-          ],
+          "apiTarget": ["service", "openbank"],
           "plugins": {
             "route-rate-limiting": {
               "second": 10
@@ -131,9 +113,7 @@
           }
         },
         "x-scopes": [],
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "parameters": [
           {
             "$ref": "#/parameters/ParamEffective"
@@ -209,10 +189,7 @@
         "summary": "CORS support",
         "x-swagstar": {
           "apiAuth": "noAuth",
-          "apiTarget": [
-            "service",
-            "openbank"
-          ],
+          "apiTarget": ["service", "openbank"],
           "plugins": {
             "route-rate-limiting": {
               "second": 10
@@ -225,15 +202,9 @@
             "$ref": "#/parameters/ParamProductId"
           }
         ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "CORS"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "tags": ["CORS"],
         "responses": {
           "200": {
             "description": "Default response for CORS method"
@@ -265,10 +236,7 @@
         "operationId": "getProductDetail",
         "x-swagstar": {
           "apiAuth": "noAuth",
-          "apiTarget": [
-            "service",
-            "openbank"
-          ],
+          "apiTarget": ["service", "openbank"],
           "plugins": {
             "route-rate-limiting": {
               "second": 10
@@ -276,10 +244,7 @@
           }
         },
         "x-scopes": [],
-        "tags": [
-          "Products",
-          "Product By Id"
-        ],
+        "tags": ["Products", "Product By Id"],
         "parameters": [
           {
             "name": "productId",
@@ -488,11 +453,7 @@
     },
     "BankingProductBundle": {
       "type": "object",
-      "required": [
-        "name",
-        "description",
-        "productIds"
-      ],
+      "required": ["name", "description", "productIds"],
       "properties": {
         "name": {
           "type": "string",
@@ -519,9 +480,7 @@
     },
     "BankingProductFeature": {
       "type": "object",
-      "required": [
-        "featureType"
-      ],
+      "required": ["featureType"],
       "properties": {
         "featureType": {
           "type": "string",
@@ -556,19 +515,12 @@
     },
     "BankingProductConstraint": {
       "type": "object",
-      "required": [
-        "constraintType"
-      ],
+      "required": ["constraintType"],
       "properties": {
         "constraintType": {
           "type": "string",
           "description": "The type of constraint described.  See the next section for an overview of valid values and their meaning",
-          "enum": [
-            "MIN_BALANCE",
-            "OPENING_BALANCE",
-            "MAX_LIMIT",
-            "MIN_LIMIT"
-          ]
+          "enum": ["MIN_BALANCE", "OPENING_BALANCE", "MAX_LIMIT", "MIN_LIMIT"]
         },
         "additionalValue": {
           "type": "string",
@@ -578,9 +530,7 @@
     },
     "BankingProductEligibility": {
       "type": "object",
-      "required": [
-        "eligibilityType"
-      ],
+      "required": ["eligibilityType"],
       "properties": {
         "eligibilityType": {
           "type": "string",
@@ -616,10 +566,7 @@
     },
     "BankingProductFee": {
       "type": "object",
-      "required": [
-        "name",
-        "feeType"
-      ],
+      "required": ["name", "feeType"],
       "properties": {
         "name": {
           "type": "string",
@@ -692,10 +639,7 @@
     },
     "BankingProductDiscount": {
       "type": "object",
-      "required": [
-        "description",
-        "discountType"
-      ],
+      "required": ["description", "discountType"],
       "properties": {
         "description": {
           "type": "string",
@@ -755,17 +699,11 @@
     },
     "ResponseBankingProductList": {
       "type": "object",
-      "required": [
-        "data",
-        "links",
-        "meta"
-      ],
+      "required": ["data", "links", "meta"],
       "properties": {
         "data": {
           "type": "object",
-          "required": [
-            "products"
-          ],
+          "required": ["products"],
           "properties": {
             "products": {
               "type": "array",
@@ -785,11 +723,7 @@
     },
     "ResponseBankingProductById": {
       "type": "object",
-      "required": [
-        "data",
-        "links",
-        "meta"
-      ],
+      "required": ["data", "links", "meta"],
       "properties": {
         "data": {
           "$ref": "#/definitions/BankingProductDetail"
@@ -804,9 +738,7 @@
     },
     "BankingProductDiscountEligibility": {
       "type": "object",
-      "required": [
-        "discountEligibilityType"
-      ],
+      "required": ["discountEligibilityType"],
       "properties": {
         "discountEligibilityType": {
           "type": "string",
@@ -839,21 +771,12 @@
     },
     "BankingProductDepositRate": {
       "type": "object",
-      "required": [
-        "depositRateType",
-        "rate"
-      ],
+      "required": ["depositRateType", "rate"],
       "properties": {
         "depositRateType": {
           "type": "string",
           "description": "The type of rate (base, bonus, etc). See the next section for an overview of valid values and their meaning",
-          "enum": [
-            "FIXED",
-            "BONUS",
-            "BUNDLE_BONUS",
-            "VARIABLE",
-            "INTRODUCTORY"
-          ]
+          "enum": ["FIXED", "BONUS", "BUNDLE_BONUS", "VARIABLE", "INTRODUCTORY"]
         },
         "rate": {
           "type": "string",
@@ -892,10 +815,7 @@
     },
     "BankingProductLendingRate": {
       "type": "object",
-      "required": [
-        "lendingRateType",
-        "rate"
-      ],
+      "required": ["lendingRateType", "rate"],
       "properties": {
         "lendingRateType": {
           "type": "string",
@@ -931,10 +851,7 @@
         "paymentStructureType": {
           "type": "string",
           "description": "When loan payments are due to be paid within each period. The investment benefit of earlier payments affect the rate that can be offered",
-          "enum": [
-            "IN_ARREARS",
-            "IN_ADVANCE"
-          ]
+          "enum": ["IN_ARREARS", "IN_ADVANCE"]
         },
         "tiers": {
           "type": "array",
@@ -961,21 +878,12 @@
     "BankingProductRateTier": {
       "type": "object",
       "description": "Defines the criteria and conditions for which a rate applies",
-      "required": [
-        "unitOfMeasure",
-        "minimumValue",
-        "maximumValue"
-      ],
+      "required": ["unitOfMeasure", "minimumValue", "maximumValue"],
       "properties": {
         "unitOfMeasure": {
           "type": "string",
           "description": "The unit of measure that applies to the tierValueMinimum and tierValueMaximum values e.g. 'DOLLAR', 'MONTH' (in the case of term deposit tiers), 'PERCENT' (in the case of loan-to-value ratio or LVR)",
-          "enum": [
-            "DOLLAR",
-            "PERCENT",
-            "MONTH",
-            "DAY"
-          ]
+          "enum": ["DOLLAR", "PERCENT", "MONTH", "DAY"]
         },
         "minimumValue": {
           "type": "number",
@@ -988,10 +896,7 @@
         "rateApplicationMethod": {
           "type": "string",
           "description": "The method used to calculate the amount to be applied using one or more tiers. A single rate may be applied to the entire balance or each applicable tier rate is applied to the portion of the balance that falls into that tier (referred to as 'bands' or 'steps')",
-          "enum": [
-            "WHOLE_BALANCE",
-            "PER_TIER"
-          ]
+          "enum": ["WHOLE_BALANCE", "PER_TIER"]
         },
         "applicabilityConditions": {
           "type": "array",
@@ -1006,21 +911,12 @@
           "items": {
             "type": "object",
             "description": "Defines the sub-tier criteria and conditions for which a rate applies",
-            "required": [
-              "unitOfMeasure",
-              "minimumValue",
-              "maximumValue"
-            ],
+            "required": ["unitOfMeasure", "minimumValue", "maximumValue"],
             "properties": {
               "unitOfMeasure": {
                 "type": "string",
                 "description": "The unit of measure that applies to the tierValueMinimum and tierValueMaximum values e.g. 'DOLLAR', 'MONTH' (in the case of term deposit tiers), 'PERCENT' (in the case of loan-to-value ratio or LVR)",
-                "enum": [
-                  "DOLLAR",
-                  "PERCENT",
-                  "MONTH",
-                  "DAY"
-                ]
+                "enum": ["DOLLAR", "PERCENT", "MONTH", "DAY"]
               },
               "minimumValue": {
                 "type": "number",
@@ -1033,10 +929,7 @@
               "rateApplicationMethod": {
                 "type": "string",
                 "description": "The method used to calculate the amount to be applied using one or more tiers. A single rate may be applied to the entire balance or each applicable tier rate is applied to the portion of the balance that falls into that tier (referred to as 'bands' or 'steps')",
-                "enum": [
-                  "WHOLE_BALANCE",
-                  "PER_TIER"
-                ]
+                "enum": ["WHOLE_BALANCE", "PER_TIER"]
               },
               "applicabilityConditions": {
                 "type": "array",
@@ -1152,19 +1045,13 @@
     },
     "ErrorList": {
       "type": "object",
-      "required": [
-        "errors"
-      ],
+      "required": ["errors"],
       "properties": {
         "errors": {
           "type": "array",
           "items": {
             "type": "object",
-            "required": [
-              "code",
-              "title",
-              "detail"
-            ],
+            "required": ["code", "title", "detail"],
             "properties": {
               "code": {
                 "type": "string",
@@ -1195,11 +1082,7 @@
       "description": "Allows for the filtering of products based on whether the current time is within the period of time defined as effective by the effectiveFrom and effectiveTo fields. If absent defaults to 'CURRENT'",
       "required": false,
       "type": "string",
-      "enum": [
-        "CURRENT",
-        "FUTURE",
-        "ALL"
-      ]
+      "enum": ["CURRENT", "FUTURE", "ALL"]
     },
     "ParamUpdatedSince": {
       "name": "updated-since",

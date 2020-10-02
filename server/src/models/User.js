@@ -2,9 +2,16 @@
 
 const mongoose = require("mongoose");
 
-const profile = ["developer", "ADR admin", "staff"];
-const userSchema = new mongoose.Schema({
-  username: {
+const User = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  email: {
     type: String,
     required: true,
   },
@@ -12,10 +19,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  profile: {
+  role: {
     type: String,
     required: true,
   },
 });
 
-module.exports = mongoose.model("UserModel", userSchema);
+module.exports = mongoose.model("User", User);

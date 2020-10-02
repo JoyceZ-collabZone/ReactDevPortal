@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
-import {
-  Badge,
-  Jumbotron,
-  Button,
-  Breadcrumb,
-  BreadcrumbItem,
-} from "reactstrap";
-import Jumbo from "./components/Jumbotran";
+
+import Jumbo from "./components/Jumbo";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -17,27 +11,31 @@ import {
   Redirect,
   useHistory,
 } from "react-router-dom";
-import { LoginHomePage } from "./components/UserLogin";
+import { UserLogin } from "./components/UserLogin";
 // import session from "express-session";
 import jwt from "jwt-decode";
 
 import SwaggerDefinition from "./components/SwaggerDefinition";
 import { UserContainer } from "./components/UserContainer";
-import { APIContainer } from "./components/APIContainer";
-import Home from "./components/Home";
+import APIContainer from "./components/APIContainer";
+import Home from "./components/Home_todelete";
 
-import NavComp from "./components/Nav";
-import AddADR from "./components/AddADR";
-import EditADR from "./components/EditADR";
+import Nav from "./components/Nav";
+import Logout from "./components/Logout";
+import AddSP from "./components/AddSP";
+import EditSP from "./components/EditSP";
+import ADRList from "./components/ADRList";
 import ADRHome from "./components/ADRHome";
-import AddDev from "./components/AddDeveloper";
+import CreateUser from "./components/CreateUer";
+import DocUpload from "./components/DocUpload";
+import UserMessage from "./components/UserMessage";
+import Table from "./components/ADRList";
+import CreateSwagger from "./components/CreateSwagger";
 
-// import { APIContainer } from "./components/APIContainer";
-
-// function to check if user is logged and reused across all routes
+//function to check if user is logged and reused across all routes
 const isUserLoggedIn = () => {
-  const SessionToken = localStorage.getItem("token");
-  console.log("logging session token", SessionToken);
+  const SessionToken = sessionStorage.getItem("token");
+  console.log("logging session token in APP.js route ", SessionToken);
   if (SessionToken) {
     return true;
   } else {
@@ -45,37 +43,54 @@ const isUserLoggedIn = () => {
   }
 };
 
-//
-
 function App() {
-  const [initialSignInState, setSignInState] = useState(isUserLoggedIn());
-  console.log("logging setSignInState", setSignInState);
+  const [loggedInState, setLoggedInState] = useState(isUserLoggedIn());
+  const [loggedinUser, setLoggedinUser] = useState({});
+  const [screenMessage, setScreenMessage] = useState({
+    message: "",
+    state: false,
+  });
+
+  console.log("logging loggedInState", loggedInState);
+  console.log("logging loggedInUser", loggedinUser);
 
   return (
     <Container>
       <Row>
         <Col>
           <Router>
-            <NavComp
-              beforeSignInState={initialSignInState}
-              afterLogoutState={setSignInState}
+            <Nav
+              loggedInState={setLoggedInState}
+              loggedInUser={setLoggedinUser}
+              setScreenMessage={setScreenMessage}
             />
-
             <Switch>
-              <Route path="/login">
-                <LoginHomePage loginStateChangeProperty={setSignInState} />
-              </Route>
-              {/* <Route path="/logout">
-            <Logout loginStateChangeProperty={setSignInState} />
-          </Route> */}
-              <Route path="/user">
-                <UserContainer />
-                {/* <Logout loginStateChangeProperty={setSignInState} /> */}
+              <Route path="/user/login">
+                <UserLogin
+                  loggedInState={setLoggedInState}
+                  loggedInUser={setLoggedinUser}
+                  setScreenMessage={setScreenMessage}
+                  screenMessage={screenMessage}
+                />
               </Route>
 
-              <Route path="/APIMetadata" exact={true}>
-                {initialSignInState && <APIContainer />}
+              <Route path="/users">
+                <UserContainer />
               </Route>
+              {/* 
+              <Route path="/docUpload">
+                <DocUpload />
+              </Route> */}
+              <Route path="/docupload">
+                <CreateSwagger />
+              </Route>
+              <Route path="/APIMetadata" exact={true}>
+                {loggedInState && <APIContainer />}
+              </Route>
+              <Route path="/software/new" exact={true}>
+                <AddSP />
+              </Route>
+
               {/* 
               <Route path="/user">
                 <userRefreshUserListing />
@@ -83,19 +98,31 @@ function App() {
               <Route path="/APIMetadata/:swaggerId">
                 <SwaggerDefinition />
               </Route>
-              <Route path="/register/admin/">
-                <AddADR />
-              </Route>
+
               <Route path="/edit/:id">
-                <EditADR />
+                <EditSP />
               </Route>
-              <Route path="/register/all">
+              <Route path="/softwares/all">
                 <ADRHome />
               </Route>
-              <Route path="/register/user/">
-                <AddDev />
+              <Route path="/table">
+                <Table />
               </Route>
-              <Route path="/">
+              <Route path="/register/user/">
+                <CreateUser
+                  setScreenMessage={setScreenMessage}
+                  screenMessage={screenMessage}
+                />
+              </Route>
+              <Route path="/logout">
+                <Logout
+                  loggedInState={setLoggedInState}
+                  loggedInUser={setLoggedinUser}
+                  setScreenMessage={setScreenMessage}
+                  screenMessage={screenMessage}
+                />
+              </Route>
+              <Route path="/home">
                 <Jumbo />
               </Route>
             </Switch>
