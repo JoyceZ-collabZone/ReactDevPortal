@@ -82,7 +82,8 @@ export default function CreateUser(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    userInput.role = createUserCall(userInput)
+    userInput.role = role;
+    createUserCall(userInput)
       .then((result) => {
         console.log("logging create user call response ", userInput);
         props.setScreenMessage({
@@ -100,7 +101,7 @@ export default function CreateUser(props) {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" className="formContainer">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -193,7 +194,7 @@ export default function CreateUser(props) {
                   labelId="role"
                   id="role"
                   value={role}
-                  onChange={setRole}
+                  onChange={handleChange}
                 >
                   <MenuItem value="developer">developer</MenuItem>
                   <MenuItem value="admin">admin</MenuItem>

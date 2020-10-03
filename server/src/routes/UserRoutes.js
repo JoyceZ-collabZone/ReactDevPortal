@@ -10,6 +10,9 @@ userRouterMiddleware.post("/new", async (request, response) => {
   const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   request.body.password = hashedPassword;
   try {
+    if (!request.body.role) {
+      response.status(400).send("user role is missing");
+    }
     // model.create, document to insert
     const createdUserDocInMongo = await UserModel.create(request.body);
     console.log("logging request body ", request.body);
@@ -19,7 +22,7 @@ userRouterMiddleware.post("/new", async (request, response) => {
     });
   } catch (error) {
     console.log("catch error for user creation route ", error);
-    response.status(500).send("Sorry, user creation has failed");
+    response.status(400).send("Sorry, user creation has failed");
   }
 });
 // post login endpoint

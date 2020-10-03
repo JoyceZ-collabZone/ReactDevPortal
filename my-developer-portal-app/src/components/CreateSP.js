@@ -81,17 +81,17 @@ export function CreateSP(props) {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" className="formContainer">
       <CssBaseline />
 
-      <div className="formContainer" className={classes.paper}>
+      <div className={classes.paper}>
         <h2 className="titleColour">{props.PageTitle}</h2>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Create New Software Product
-        </Typography>
+        {/* <Typography component="h1" variant="h5">
+          Software Product Management
+        </Typography> */}
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"

@@ -23,14 +23,14 @@ const columns = [
   {
     id: "legalEntityName",
     label: "Legal Entity Name",
-    minWidth: 170,
+    minWidth: 40,
     align: "left",
   },
   { id: "industry", label: "Industry", minWidth: 100 },
   {
     id: "brandName",
     label: "Brand Name",
-    minWidth: 170,
+    minWidth: 150,
   },
   {
     id: "softwareProductName",
@@ -40,12 +40,12 @@ const columns = [
   {
     id: "softwareProductDescription",
     label: "Software Product Description",
-    minWidth: 170,
+    minWidth: 300,
   },
   {
     id: "status",
     label: "Status",
-    minWidth: 170,
+    minWidth: 40,
   },
   {
     id: "edit",

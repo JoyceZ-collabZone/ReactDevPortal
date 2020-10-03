@@ -1,6 +1,8 @@
 const mongoose = require("mongoose"); // not middleware as express.use middleware, not part of express engine
 
-const mongoUri = process.env.MONGODB_URI || "mongodb://localhost/Onboarding"; // use either connection
+const mongoUri =
+  process.env.MONGODB_URI ||
+  "mongodb://jz:secret@localhost:27888/?authSource=admin"; // use either connection
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

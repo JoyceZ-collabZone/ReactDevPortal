@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { call_getADRById, call_updateADRById } from "../api";
-import { CreateSP } from "./CreateSP_todelete";
+import { CreateSP } from "./CreateSP";
 import ScreenMessage from "./ScreenMessage";
 function EditSP() {
   const [editADRSubmitMsg, setEditADRSubmitMsg] = useState({
@@ -24,7 +24,6 @@ function EditSP() {
   };
 
   const submitHandler = async (formData) => {
-
     formData.user = 10;
     formData.role = 10;
     formData.DateTime = 10;

@@ -23,15 +23,19 @@ function Jumbo() {
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="OB"
-          height="500"
-          image={homeImage}
-          title="Open banking"
-        />
+    <>
+      <Card className={classes.root}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            alt="OB"
+            height="500"
+            image={homeImage}
+            title="Open banking"
+          />
+        </CardActionArea>
+      </Card>
+      <Card className={"jumboHeight"}>
         <CardContent>
           <Typography gutterBottom variant="h4" component="h4">
             WELCOME TO MY DEVELOPER PORTAL
@@ -42,21 +46,22 @@ function Jumbo() {
             well. We can’t wait to see what you create!
           </Typography>
         </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="large" color="primary" Link>
-          Explore Our APIs public apis
-        </Button>
-        <Button
-          size="large"
-          color="primary"
-          href="https://www.accc.gov.au/focus-areas/consumer-data-right-cdr-0"
-          target="_blank"
-        >
-          Learn More
-        </Button>
-      </CardActions>
-    </Card>
+
+        <CardActions>
+          <Button size="large" color="primary" Link>
+            Explore Our Public APIs
+          </Button>
+          <Button
+            size="large"
+            color="primary"
+            href="https://www.accc.gov.au/focus-areas/consumer-data-right-cdr-0"
+            target="_blank"
+          >
+            Learn More
+          </Button>
+        </CardActions>
+      </Card>
+    </>
   );
 }
 

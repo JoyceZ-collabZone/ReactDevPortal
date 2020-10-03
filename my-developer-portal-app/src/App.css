@@ -83,7 +83,6 @@ body {
   margin-right: auto;
   margin-bottom: 60px;
 }
-.formContainer,
 .redoc-wrap {
   margin-top: 120px;
   margin-left: auto;
@@ -92,11 +91,14 @@ body {
   background-color: white;
 }
 .titleColour {
-  color: green;
+  color: darkblue;
+  margin-top: 0px;
 }
 .formContainer {
-  padding: 30px;
-  width: 60%;
+  margin-top: 20px;
+  padding: 20px;
+  width: 80%;
+  background-color: white;
 }
 .navBar {
   margin-bottom: 120px;
@@ -120,15 +122,15 @@ body {
   width: 800px;
   height: 200px;
 }
-.makeStyles-paper-1 {
+/* .makeStyles-paper-1 {
   background-color: white;
-}
-.makeStyles-form-3 {
+} */
+/* .makeStyles-form-3 {
   padding-top: 40px;
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 60px;
-}
+} */
 .MuiTypography-root {
   margin-top: 70px;
   margin-left: 50px;
@@ -138,22 +140,22 @@ body {
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
   background-color: none;
 }
-.makeStyles-paper-2 {
+/* .makeStyles-paper-2 {
   display: flex;
   margin-top: 60px;
   align-items: center;
   padding: 40px;
   flex-direction: column;
   background-color: white;
-}
-.makeStyles-paper-21 {
+} */
+/* .makeStyles-paper-21 {
   display: flex;
   margin-top: 64px;
   align-items: center;
   flex-direction: column;
   background-color: white;
   padding: 30px;
-}
+} */
 /* .MuiCardActions-root {
   display: flex;
   padding: 8px;
@@ -173,4 +175,16 @@ h2 {
   margin-inline-start: 30px;
   margin-inline-end: 30px;
   font-weight: bold;
+}
+/* .makeStyles-paper-16 {
+  display: flex;
+  margin-top: 64px;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  padding: 20px;
+} */
+.jumboHeight {
+  position: absolute;
+  bottom: 0;
 }

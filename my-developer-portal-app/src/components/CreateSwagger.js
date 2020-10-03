@@ -27,16 +27,7 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
-  // image: {
-  //   backgroundImage: "url(/background.png)",
-  //   backgroundRepeat: "no-repeat",
-  //   backgroundColor:
-  //     theme.palette.type === "light"
-  //       ? theme.palette.grey[50]
-  //       : theme.palette.grey[900],
-  //   backgroundSize: "cover",
-  //   backgroundPosition: "center",
-  // },
+
   paper: {
     margin: theme.spacing(8, 4),
     display: "flex",
@@ -55,34 +46,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
-// const DocUpload = () => {
-//   // specify upload params and url for your files
-//   const getUploadParams = ({ meta }) => {
-//     return { url: "https://httpbin.org/post" };
-//   };
-
-//   // called every time a file's `status` changes
-//   const handleChangeStatus = ({ meta, file }, status) => {
-//     console.log(status, meta, file);
-//   };
-
-//   // receives array of files that are done uploading when submit button is clicked
-//   const handleSubmit = (files, allFiles) => {
-//     console.log(files.map((f) => f.meta));
-
-//     allFiles.forEach((f) => f.remove());
-//   };
-
-//   return (
-//     <Dropzone
-//       getUploadParams={getUploadParams}
-//       onChangeStatus={handleChangeStatus}
-//       onSubmit={handleSubmit}
-//       accept="image/*,audio/*,video/*,application/*"
-//     />
-//   );
-// };
 
 function CreateSwagger() {
   const classes = useStyles();
@@ -107,7 +70,12 @@ function CreateSwagger() {
   const onFileChange = (e) => {
     console.log("logging file name ", e.target.files[0]);
     setFileData(e.target.files[0]);
-    call_uploadFile(fileData)
+
+    formData.append("description", "good time");
+
+    call_uploadFile(fileData);
+    console
+      .log("logging file data", fileData)
       .then((result) => {
         console.log(
           "step 2a: logging browser trigger fetch api all to node.js in createSwagger route/success",
