@@ -86,14 +86,14 @@ export default function CreateUser(props) {
     createUserCall(userInput)
       .then((result) => {
         console.log("logging create user call response ", userInput);
-        props.setScreenMessage({
+        props.setScreenMessageCreateUser({
           message: `User ${userInput.firstName} is successfully created`,
           state: true,
         });
       })
       .catch((error) => {
         console.log("logging error ", error);
-        props.setScreenMessage({
+        props.setScreenMessageCreateUser({
           message: `User creation has failed, please try again`,
           state: false,
         });
@@ -110,16 +110,20 @@ export default function CreateUser(props) {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        {props.screenMessage &&
-          props.screenMessage.message &&
-          props.screenMessage.state && (
-            <Alert severity="success">{props.screenMessage.message}</Alert>
+        {props.screenMessageCreateUser &&
+          props.screenMessageCreateUser.message &&
+          props.screenMessageCreateUser.state && (
+            <Alert severity="success">
+              {props.screenMessageCreateUser.message}
+            </Alert>
           )}
 
-        {props.screenMessage &&
-          props.screenMessage.message &&
-          !props.screenMessage.state && (
-            <Alert severity="error">{props.screenMessage.message}</Alert>
+        {props.screenMessageCreateUser &&
+          props.screenMessageCreateUser.message &&
+          !props.screenMessageCreateUser.state && (
+            <Alert severity="error">
+              {props.screenMessageCreateUser.message}
+            </Alert>
           )}
         <form onSubmit={handleSubmit} className={classes.form}>
           <Grid container spacing={2}>

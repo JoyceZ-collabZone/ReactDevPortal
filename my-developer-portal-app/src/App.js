@@ -46,7 +46,17 @@ const isUserLoggedIn = () => {
 function App() {
   const [loggedInState, setLoggedInState] = useState(isUserLoggedIn());
   const [loggedinUser, setLoggedinUser] = useState({});
-  const [screenMessage, setScreenMessage] = useState({
+  const [screenMessageCreateUser, setScreenMessageCreateUser] = useState({
+    message: "",
+    state: false,
+  });
+
+  const [screenMessageSignIn, setScreenMessageSignIn] = useState({
+    message: "",
+    state: false,
+  });
+
+  const [screenMessageLogout, setScreenMessageLogout] = useState({
     message: "",
     state: false,
   });
@@ -62,15 +72,17 @@ function App() {
             <Nav
               loggedInState={setLoggedInState}
               loggedInUser={setLoggedinUser}
-              setScreenMessage={setScreenMessage}
+              // setScreenMessage={setScreenMessage}
+              setScreenMessageLogout={setScreenMessageLogout}
+              screenMessageLogout={screenMessageLogout}
             />
             <Switch>
               <Route path="/user/login">
                 <UserLogin
                   loggedInState={setLoggedInState}
                   loggedInUser={setLoggedinUser}
-                  setScreenMessage={setScreenMessage}
-                  screenMessage={screenMessage}
+                  setScreenMessageSignIn={setScreenMessageSignIn}
+                  screenMessageSignIn={screenMessageSignIn}
                 />
               </Route>
 
@@ -110,16 +122,16 @@ function App() {
               </Route>
               <Route path="/register/user/">
                 <CreateUser
-                  setScreenMessage={setScreenMessage}
-                  screenMessage={screenMessage}
+                  setScreenMessageCreateUser={setScreenMessageCreateUser}
+                  screenMessageCreateUser={screenMessageCreateUser}
                 />
               </Route>
               <Route path="/logout">
                 <Logout
                   loggedInState={setLoggedInState}
                   loggedInUser={setLoggedinUser}
-                  setScreenMessage={setScreenMessage}
-                  screenMessage={screenMessage}
+                  setScreenMessageLogout={setScreenMessageLogout}
+                  screenMessageLogout={screenMessageLogout}
                 />
               </Route>
               <Route path="/home">

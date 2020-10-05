@@ -2,7 +2,9 @@ const mongoose = require("mongoose"); // not middleware as express.use middlewar
 
 const mongoUri =
   process.env.MONGODB_URI ||
-  "mongodb://jz:secret@localhost:27888/?authSource=admin"; // use either connection
+  "mongodb://localhost/Onboarding" ||
+  `mongodb://${process.env.USER_NAME}:${process.env.SECRET}@localhost:27888/?authSource=admin` ||
+  console.log("logging env", process.env);
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -13,7 +15,7 @@ mongoDatabase.on(
   console.error.bind(console, "mongo database connection error")
 );
 mongoDatabase.once("open", function () {
-  console.log("Mongoose database is connected");
+  console.log("Mongoose database is connected to ", mongoUri);
 });
 
 // 0.0.0.0:27017-27019->27017-27019/tcp   developerPortal

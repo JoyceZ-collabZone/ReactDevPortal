@@ -19,10 +19,10 @@ import Alert from "@material-ui/lab/Alert";
 export default function Logout(props) {
   return (
     <div class="logoutMessage">
-      {props.screenMessage &&
-        props.screenMessage.message &&
-        props.screenMessage.state && (
-          <Alert severity="success">{props.screenMessage.message}</Alert>
+      {props.screenMessageLogout &&
+        props.screenMessageLogout.message &&
+        props.screenMessageLogout.state && (
+          <Alert severity="success">{props.screenMessageLogout.message}</Alert>
         )}
     </div>
   );

@@ -14,63 +14,44 @@ export default function Nav(props) {
     window.sessionStorage.removeItem("token");
     props.loggedInState(false); // set loggedin to false
     props.loggedInUser("");
-    props.setScreenMessage({
+    props.setScreenMessageLogout({
       message: `You have successfully logged out`,
       state: true,
     });
   };
 
   return (
-    <Breadcrumbs aria-label="breadcrumb">
-      <Link to="/home">
-        <Button variant="contained" color="secondary">
-          Home
-        </Button>
-      </Link>
-      <Link to="/register/user">
-        <Button variant="contained" color="secondary">
-          User Signup
-        </Button>
-      </Link>
-      <Link to="/user/login">
-        <Button variant="contained" color="secondary">
-          Login
-        </Button>
-      </Link>
-      <Link to="/docupload">
-        <Button variant="contained" color="secondary">
-          Upload Swagger
-        </Button>
-      </Link>
+    <div class="topnav">
+      <ul>
+        <li>
+          <Link to="/home">Home</Link>
+        </li>
+        <li>
+          <Link to="/user/login">Sign In</Link>
+        </li>
+        <li></li>
+        <li>
+          <Link to="/register/user">Create New User</Link>
 
-      <Link to="/software/new">
-        <Button variant="contained" color="secondary">
-          Software Product Registration
-        </Button>
-      </Link>
-      <Link to="/softwares/all">
-        <Button variant="contained" color="secondary">
-          View All Software Product
-        </Button>
-      </Link>
-
-      {/* <NavLink tag={Link} to="/APIMetadata/5f2e06043a8c4409ecff1407">
-        <Button color="success"> Public API</Button>
-      </NavLink> */}
-      {props.loggedInState && (
-        <Link to="/APIMetadata/">
-          <Button variant="contained" color="secondary">
-            API Swagger Definition
-          </Button>
-        </Link>
-      )}
-      {props.loggedInState && (
-        <Link to="/logout" onClick={handleUserClickLogout}>
-          <Button variant="contained" color="secondary">
+          <li>
+            <Link to="/docupload">Upload New Swagger</Link>
+          </li>
+        </li>
+        <li>
+          <Link to="/software/new">Software Product Registration</Link>
+        </li>
+        <li>
+          <Link to="/softwares/all"> View All Software Product</Link>
+        </li>
+        {props.loggedInState && (
+          <Link to="/APIMetadata/"> API Swagger Definition</Link>
+        )}
+        {props.loggedInState && (
+          <Link to="/logout" onClick={handleUserClickLogout}>
             Logout
-          </Button>
-        </Link>
-      )}
-    </Breadcrumbs>
+          </Link>
+        )}
+      </ul>
+    </div>
   );
 }

@@ -102,14 +102,14 @@ export function UserLogin(props) {
         );
         props.loggedInState(true);
         props.loggedInUser(decodedToken);
-        props.setScreenMessage({
+        props.setScreenMessageSignIn({
           message: `You have successfully logged in`,
           state: true,
         });
         // history.push("/APIMetadata");
       })
       .catch((error) => {
-        props.setScreenMessage({
+        props.setScreenMessageSignIn({
           message: "User login has failed, please try again",
           state: false,
         });
@@ -133,16 +133,20 @@ export function UserLogin(props) {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          {props.screenMessage &&
-            props.screenMessage.message &&
-            props.screenMessage.state && (
-              <Alert severity="success">{props.screenMessage.message}</Alert>
+          {props.screenMessageSignIn &&
+            props.screenMessageSignIn.message &&
+            props.screenMessageSignIn.state && (
+              <Alert severity="success">
+                {props.screenMessageSignIn.message}
+              </Alert>
             )}
 
-          {props.screenMessage &&
-            props.screenMessage.message &&
-            !props.screenMessage.state && (
-              <Alert severity="error">{props.screenMessage.message}</Alert>
+          {props.screenMessageSignIn &&
+            props.screenMessageSignIn.message &&
+            !props.screenMessageSignIn.state && (
+              <Alert severity="error">
+                {props.screenMessageSignIn.message}
+              </Alert>
             )}
 
           <form className={classes.form} noValidate onSubmit={submit}>

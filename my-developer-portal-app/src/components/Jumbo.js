@@ -10,6 +10,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +30,7 @@ function Jumbo() {
           <CardMedia
             component="img"
             alt="OB"
-            height="500"
+            height="800"
             image={homeImage}
             title="Open banking"
           />
@@ -48,8 +49,8 @@ function Jumbo() {
         </CardContent>
 
         <CardActions>
-          <Button size="large" color="primary" Link>
-            Explore Our Public APIs
+          <Button size="large" color="primary">
+            <Link to="/user/login"> Sign in</Link>
           </Button>
           <Button
             size="large"
