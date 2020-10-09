@@ -15,15 +15,15 @@ function SwaggerDefinition() {
   }, []);
   const callAPIById = async () => {
     const result = await getAPIListingById(swaggerId);
-    console.log("logging swagger", result.Swagger);
-    setSwaggerstate(result.Swagger);
+    console.log("logging swagger", result.swagger);
+    setSwaggerstate(result.swagger);
     setLoadingState(false);
     console.log("logging swagger state", swaggerstate);
   };
 
   return (
-    <React.Fragment>
-      {loadingState && <p>Loading</p>}
+    <React.Fragment className="swaggerContainer">
+      {loadingState && <h3>Loading</h3>}
       {!loadingState && <RedocStandalone spec={swaggerstate} />}
     </React.Fragment>
   );

@@ -51,6 +51,10 @@ function CreateSwagger() {
   const classes = useStyles();
   const [formData, setFormData] = useState({});
   const [fileData, setFileData] = useState({});
+  const [screenMessageUpload, setScreenMessageUpload] = useState({
+    message: "",
+    state: false,
+  });
 
   //   let history = useHistory();
 
@@ -70,38 +74,8 @@ function CreateSwagger() {
   const onFileChange = (e) => {
     console.log("logging file name ", e.target.files[0]);
     setFileData(e.target.files[0]);
-
-    formData.append("description", "good time");
-
-    call_uploadFile(fileData);
-    console
-      .log("logging file data", fileData)
-      .then((result) => {
-        console.log(
-          "step 2a: logging browser trigger fetch api all to node.js in createSwagger route/success",
-          result
-        );
-
-        // props.loggedInState(true);
-
-        //     props.screenMessage({
-        //       message: `step 6: User ${decodedToken.firstName} has successfully logged in`,
-        //       state: true,
-        //     });
-        //     // history.push("/APIMetadata");
-      })
-      .catch((error) => {
-        // props.screenMessage({
-        //   message:
-        //     "step 6b: User logging has failed from react route, please try again",
-        //   state: false,
-        // });
-
-        console.log(
-          "step 2b: logging frontend signIn response in react user route/error",
-          error
-        );
-      });
+    console.log("logging file data", setFileData);
+    // formData.append("description", "good time");
   };
 
   const onSubmit = (e) => {
@@ -110,17 +84,37 @@ function CreateSwagger() {
     const data = new FormData();
     console.log("logging file data ", fileData);
 
-    data.append("fileData", fileData);
-    // data.append("name", fileData);
-    // data.append("fileData", fileData);
-    // data.append("fileData", fileData);
+    data.append("fileUpload", fileData);
+    data.append("name", formData.name);
+    data.append("description", formData.description);
+    data.append("scope", formData.scope);
+    data.append("category", formData.category);
+    data.append("permission", formData.permission);
 
     console.log("logging  data ", data);
+    console.log("form state logging", formData);
 
-    console.log(
-      "step 1: logging browser submit event from swagger  route",
-      formData
-    );
+    call_uploadFile(data)
+      .then((result) => {
+        setScreenMessageUpload({
+          message: `Document ${formData.name} is successfully upload`,
+          state: true,
+        });
+        console.log(
+          "logging browser trigger fetch api all to node.js in createSwagger route/success",
+          result
+        );
+      })
+      .catch((error) => {
+        setScreenMessageUpload({
+          message: `Document ${formData.name} is failed uploading`,
+          state: false,
+        });
+        console.log(
+          "step 2b: logging frontend signIn response in react user route/error",
+          error
+        );
+      });
   };
 
   return (
@@ -133,12 +127,19 @@ function CreateSwagger() {
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
+
           <Typography component="h1" variant="h5">
             Swagger Metadata
           </Typography>
-          {/* {props.screenMessage && (
-            <Alert severity="success">{props.screenMessage}</Alert>
-          )} */}
+
+          {screenMessageUpload.message && screenMessageUpload.state && (
+            <Alert severity="success">{screenMessageUpload.message}</Alert>
+          )}
+
+          {screenMessageUpload.message && !screenMessageUpload.state && (
+            <Alert severity="error">{screenMessageUpload.message}</Alert>
+          )}
+
           <form className={classes.form} noValidate onSubmit={onSubmit}>
             <TextField
               variant="outlined"

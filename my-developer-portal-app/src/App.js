@@ -18,18 +18,17 @@ import jwt from "jwt-decode";
 import SwaggerDefinition from "./components/SwaggerDefinition";
 import { UserContainer } from "./components/UserContainer";
 import APIContainer from "./components/APIContainer";
-import Home from "./components/Home_todelete";
 
 import Nav from "./components/Nav";
 import Logout from "./components/Logout";
 import AddSP from "./components/AddSP";
 import EditSP from "./components/EditSP";
-import ADRList from "./components/ADRList";
-import ADRHome from "./components/ADRHome";
+import SPList from "./components/SPList";
+import SPHome from "./components/SPHome";
 import CreateUser from "./components/CreateUer";
 import DocUpload from "./components/DocUpload";
 import UserMessage from "./components/UserMessage";
-import Table from "./components/ADRList";
+import Table from "./components/SPList";
 import CreateSwagger from "./components/CreateSwagger";
 
 //function to check if user is logged and reused across all routes
@@ -46,6 +45,7 @@ const isUserLoggedIn = () => {
 function App() {
   const [loggedInState, setLoggedInState] = useState(isUserLoggedIn());
   const [loggedinUser, setLoggedinUser] = useState({});
+  const [userRole, setUserRole] = useState("");
   const [screenMessageCreateUser, setScreenMessageCreateUser] = useState({
     message: "",
     state: false,
@@ -73,6 +73,7 @@ function App() {
               loggedInState={setLoggedInState}
               loggedInUser={setLoggedinUser}
               // setScreenMessage={setScreenMessage}
+              userRole={setUserRole}
               setScreenMessageLogout={setScreenMessageLogout}
               screenMessageLogout={screenMessageLogout}
             />
@@ -83,18 +84,30 @@ function App() {
                   loggedInUser={setLoggedinUser}
                   setScreenMessageSignIn={setScreenMessageSignIn}
                   screenMessageSignIn={screenMessageSignIn}
+                  userRole={setUserRole}
                 />
               </Route>
 
-              <Route path="/users">
-                <UserContainer />
+              <Route path="/user">
+                {userRole === "staff" ? (
+                  <UserContainer />
+                ) : (
+                  <div className="apiTitleColour">
+                    <h2>
+                      Sorry, you are not authorised to view this User listing
+                      page
+                    </h2>
+                  </div>
+                )}
               </Route>
-              {/* 
-              <Route path="/docUpload">
-                <DocUpload />
-              </Route> */}
               <Route path="/docupload">
-                <CreateSwagger />
+                {userRole === "staff" ? (
+                  <CreateSwagger />
+                ) : (
+                  <div className="apiTitleColour">
+                    <h2>Sorry, you are not authorised to upload document</h2>
+                  </div>
+                )}
               </Route>
               <Route path="/APIMetadata" exact={true}>
                 {loggedInState && <APIContainer />}
@@ -102,11 +115,6 @@ function App() {
               <Route path="/software/new" exact={true}>
                 <AddSP />
               </Route>
-
-              {/* 
-              <Route path="/user">
-                <userRefreshUserListing />
-              </Route> */}
               <Route path="/APIMetadata/:swaggerId">
                 <SwaggerDefinition />
               </Route>
@@ -115,7 +123,15 @@ function App() {
                 <EditSP />
               </Route>
               <Route path="/softwares/all">
-                <ADRHome />
+                {userRole === "staff" ? (
+                  <SPHome />
+                ) : (
+                  <div className="apiTitleColour">
+                    <h2>
+                      Sorry, you are not authorised to view this SP listing page
+                    </h2>
+                  </div>
+                )}
               </Route>
               <Route path="/table">
                 <Table />

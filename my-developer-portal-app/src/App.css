@@ -52,7 +52,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #0c0b0b;
+  /* background-color: #0c0b0b; */
   background: url("./assets/technology-texture-neon-threads-texture-threads-background-black-background-with-threads-bokeh.jpg")
     no-repeat center center scroll;
   background-size: cover;
@@ -91,7 +91,7 @@ body {
   background-color: white;
 }
 .titleColour {
-  color: yellowgreen;
+  color: black;
   margin-top: 0px;
 }
 .formContainer {
@@ -115,12 +115,19 @@ body {
   background-color: black;
 }
 .logoutMessage {
-  margin-top: 120px;
+  /* margin-top: 120px;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 60px;
-  width: 800px;
-  height: 200px;
+  margin-bottom: 60px; */
+  /* width: 800px;
+  height: 200px; */
+  position: fixed;
+  width: 600px;
+  top: 50%;
+  left: 40%;
+  margin-top: -50px;
+  margin-left: -100px;
+  background-color: white;
 }
 /* .makeStyles-paper-1 {
   background-color: white;
@@ -176,46 +183,137 @@ h2 {
   margin-inline-end: 30px;
   font-weight: bold;
 }
-/* .makeStyles-paper-16 {
-  display: flex;
-  margin-top: 64px;
-  align-items: center;
-  flex-direction: column;
-  background-color: white;
-  padding: 20px;
-} */
-.jumboHeight {
-  position: absolute;
-  bottom: 0;
-}
-ul {
-  list-style-type: none;
+
+body {
   margin: 0;
   padding: 0;
-}
-.topnav {
-  background-color: black;
-  overflow: hidden;
+
+  /* make it look decent enough */
+  /* background: #232323; */
+  /* color: #cdcdcd; */
+  font-family: "Avenir Next", "Avenir", sans-serif;
 }
 
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: -30px;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+/* Style sidebar links */
+.sidebar a {
+  padding: 6px 8px 6px 16px;
   text-decoration: none;
-  font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  /* color: black; */
-}
-
-/* Add a color to the active/current link */
-.topnav a.active {
-  background-color: #4caf50;
+  font-size: 20px;
   color: white;
+  display: block;
+}
+
+/* Style links on mouse-over */
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+/* Style the main content */
+.main {
+  margin-left: 100px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+/* Add media queries for small screens (when the height of the screen is less than 450px, add a smaller padding and font-size) */
+@media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 15px;
+  }
+  .sidebar a {
+    font-size: 20px;
+  }
+}
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 20%;
+}
+.centered {
+  position: fixed;
+  top: 10%;
+  left: 40%;
+  margin-top: -80px;
+  margin-left: -100px;
+  background-color: white;
+}
+.centeredCreateUser {
+  position: fixed;
+  top: 10%;
+  left: 40%;
+  margin-top: 60px;
+  margin-left: -100px;
+  background-color: white;
+}
+.centeredSP {
+  position: fixed;
+  top: 10%;
+  left: 40%;
+  margin-top: 80px;
+  margin-left: -100px;
+  background-color: white;
+}
+h1 {
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+.jumboPage {
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  right: 25%;
+  margin-top: -50px;
+  margin-left: -100px;
+  background-color: white;
+}
+.ADRListPage {
+  position: fixed;
+  top: 20%;
+  left: 20%;
+  right: 5%;
+  margin-top: -50px;
+  margin-left: -100px;
+  background-color: white;
+}
+.apiContainer {
+  /* position: fixed; */
+  /* top: 20%; */
+  /* left: 30%; */
+  right: 5%;
+  margin-top: 15px;
+  margin-left: 250px;
+  background-color: white;
+}
+.swaggerContainer {
+  position: fixed;
+  /* top: 10%; */
+  left: 70%;
+  margin-left: -100px;
+  right: 5%;
+  margin-top: 5px;
+  /* margin-left: 600px; */
+  background-color: white;
+}
+.apiTitleColour {
+  color: white;
+  padding-left: 400px;
+  padding-top: 200px;
 }

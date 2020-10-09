@@ -10,15 +10,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
-// import {
-//   Card,
-//   CardFooter,
-//   Button,
-//   CardTitle,
-//   CardText,
-//   Row,
-//   Col,
-// } from "reactstrap";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,17 +49,10 @@ export default function APIList(props) {
   console.log("logging params in API list", params);
 
   console.log("button", buttonClicked);
-  // const navigateTo = (swaggerId, swagger) => {
-  //   console.log("logging swagger ", swagger);
-  //   history.push({
-  //     pathname: `/APIMetadata/${swaggerId}`,
-  //     state: { swagger },
-  //   });
-  // };
 
   return (
-    <div className={classes.root}>
-      <Alert severity="success">Welcome to my api portal</Alert>
+    <div className={classes.root} className="apiContainer">
+      <Alert severity="success">Welcome to my API developer portal</Alert>
       <Grid container spacing={5}>
         {props.metadataStateProperty.map((eachAPI) => {
           return (
@@ -85,13 +69,27 @@ export default function APIList(props) {
                     color="textSecondary"
                     gutterBottom
                   >
+                    API Name: {eachAPI.name}
+                  </Typography>
+                  <Typography
+                    className={classes.title}
+                    color="textSecondary"
+                    gutterBottom
+                  >
                     Category: {eachAPI.category}
                   </Typography>
-                  <Typography variant="h7" component="h7">
+                  <Typography
+                    className={classes.title}
+                    color="textSecondary"
+                    gutterBottom
+                  >
                     Scope: {eachAPI.scope}
                   </Typography>
                   <Typography variant="body2" component="p">
                     Description: {eachAPI.description}
+                  </Typography>
+                  <Typography variant="body2" component="p">
+                    Permission: {eachAPI.permission}
                   </Typography>
                 </CardContent>
                 <CardActions>

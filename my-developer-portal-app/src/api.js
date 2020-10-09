@@ -86,16 +86,6 @@ export async function getAPIListingById(id) {
 //   }
 // }
 
-export async function call_getADRs() {
-  const result = await fetch("/ADRMetadata", {
-    headers: commonFetchRequestHeaders,
-  });
-  console.log("logging fetch api/getADRs reslut ", result);
-  const ADRResponse = await result.json();
-  console.log("logging fetch api/getADRs ADRResponse ", ADRResponse);
-  return ADRResponse;
-}
-
 export async function call_getADRById(id) {
   const result = await fetch("/ADRMetadata/" + id, {
     headers: commonFetchRequestHeaders,
@@ -126,17 +116,6 @@ export async function call_addADR(ADRInputDetails) {
   return addADRResponse;
 }
 
-export async function call_deleteADR(id) {
-  const result = await fetch(`/ADRMetadata/delete/${id}`, {
-    method: "DELETE",
-
-    headers: commonFetchRequestHeaders,
-  });
-  const deleteADRResponse = await result.json();
-
-  return deleteADRResponse;
-}
-
 export async function createUserCall(userInput) {
   const result = await fetch("/user/new", {
     method: "POST",
@@ -147,21 +126,24 @@ export async function createUserCall(userInput) {
   return createUserResponse;
 }
 
-export async function createSwaggerAPICall(userInput) {
-  const result = await fetch("/apimetadata/new", {
-    method: "POST",
-    body: JSON.stringify(userInput),
-    headers: commonFetchRequestHeaders,
-  });
-  const createSwaggerResponse = await result.json();
-  return createSwaggerResponse;
-}
+// export async function createSwaggerAPICall(userInput) {
+//   const result = await fetch("/apimetadata/new", {
+//     method: "POST",
+//     body: JSON.stringify(userInput),
+//     headers: commonFetchRequestHeaders,
+//   });
+//   const createSwaggerResponse = await result.json();
+//   return createSwaggerResponse;
+// }
 
-export async function call_uploadFile(fileInput) {
+export async function call_uploadFile(data) {
   const result = await fetch("/apimetadata/upload", {
     method: "POST",
-    body: JSON.stringify(fileInput),
-    headers: commonFetchRequestHeaders,
+    body: data,
+    headers: {
+      // "Content-Type": "multipart/form-data", not to mention this, multer does this automatically
+      requestTokenHeader: window.sessionStorage.getItem("token"),
+    },
   });
   const docUploadResponse = await result.json();
   console.log(
@@ -169,4 +151,28 @@ export async function call_uploadFile(fileInput) {
     docUploadResponse
   );
   return docUploadResponse;
+}
+
+export async function call_getADRs() {
+  // if (userRole === "staff") {
+  const result = await fetch("/ADRMetadata", {
+    headers: commonFetchRequestHeaders,
+  });
+  console.log("logging fetch api/getADRs reslut ", result);
+  const ADRResponse = await result.json();
+  console.log("logging fetch api/getADRs ADRResponse ", ADRResponse);
+  return ADRResponse;
+
+  // }
+}
+
+export async function call_deleteADR(id) {
+  const result = await fetch(`/ADRMetadata/delete/${id}`, {
+    method: "DELETE",
+
+    headers: commonFetchRequestHeaders,
+  });
+  const deleteADRResponse = await result.json();
+
+  return deleteADRResponse;
 }

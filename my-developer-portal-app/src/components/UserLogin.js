@@ -29,14 +29,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   image: {
-    backgroundImage: "url(../images/SignInPage.jpg)",
+    // backgroundImage: "url(../images/SignInPage.jpg)",
     backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "light"
-        ? theme.palette.grey[50]
-        : theme.palette.grey[900],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+    // backgroundColor:
+    //   theme.palette.type === "light"
+    //     ? theme.palette.grey[50]
+    //     : theme.palette.grey[900],
+    // backgroundSize: "cover",
+    // backgroundPosition: "center",
   },
   paper: {
     margin: theme.spacing(8, 4),
@@ -87,6 +87,8 @@ export function UserLogin(props) {
         const decodedToken = jwt(token);
         console.log("decoded token", decodedToken);
         const tokenExpiryDateTime = moment.unix(decodedToken.exp);
+        const userRole = decodedToken.role;
+        console.log("logging user role ", userRole);
         console.log("token expires at ", tokenExpiryDateTime);
         const isTokenActive = moment().isBefore(tokenExpiryDateTime);
         console.log("isTokenActive", isTokenActive);
@@ -95,15 +97,17 @@ export function UserLogin(props) {
           props.screenMessage
         );
         window.sessionStorage.setItem("token", token);
+        window.sessionStorage.setItem("userRole", userRole);
         // updateHeaderOptions();
         console.log(
           "step 5: token in browser login response react route ",
           token
         );
         props.loggedInState(true);
+        props.userRole(userRole);
         props.loggedInUser(decodedToken);
         props.setScreenMessageSignIn({
-          message: `You have successfully logged in`,
+          message: `You have successfully logged in as "${userRole}"`,
           state: true,
         });
         // history.push("/APIMetadata");
@@ -125,7 +129,16 @@ export function UserLogin(props) {
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid
+        item
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square
+        className="centered"
+      >
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />

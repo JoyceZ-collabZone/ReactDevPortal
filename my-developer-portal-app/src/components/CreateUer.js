@@ -101,7 +101,12 @@ export default function CreateUser(props) {
   };
 
   return (
-    <Container component="main" maxWidth="xs" className="formContainer">
+    <Container
+      component="main"
+      maxWidth="xs"
+      className="formContainer"
+      className="centeredCreateUser"
+    >
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

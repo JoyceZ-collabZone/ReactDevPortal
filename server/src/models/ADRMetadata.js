@@ -18,10 +18,10 @@ const ADRSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  brandName: {
-    type: String,
-    required: false,
-  },
+  // brandName: {
+  //   type: String,
+  //   required: false,
+  // },
   softwareProductId: {
     type: String,
     required: false,
@@ -35,10 +35,10 @@ const ADRSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  status: {
-    type: String,
-    required: false,
-  },
+  // status: {
+  //   type: String,
+  //   required: false,
+  // },
   createdBy: {
     type: String,
     required: false,

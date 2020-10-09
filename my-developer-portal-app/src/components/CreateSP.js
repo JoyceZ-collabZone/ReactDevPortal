@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Alert from "@material-ui/lab/Alert";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -53,6 +54,10 @@ export function CreateSP(props) {
     props.ADRCreateOrEdit.softwareProductDescription
   );
 
+  const [screenMessageCreateSP, setScreenMessageCreateSP] = useState({
+    message: "",
+    state: false,
+  });
   const setFormValues = (event) => {
     // const newFormState = { ...formState };
 
@@ -73,6 +78,11 @@ export function CreateSP(props) {
       softwareProductDescription: softwareProductDescription,
     });
 
+    setScreenMessageCreateSP({
+      message: `SP ${legalEntityName} is successfully managed`,
+      state: true,
+    });
+
     setLegalEntityName("");
     setIndustry("");
     setLogoUri("");
@@ -81,17 +91,28 @@ export function CreateSP(props) {
   };
 
   return (
-    <Container component="main" maxWidth="xs" className="formContainer">
+    <Container
+      component="main"
+      maxWidth="xs"
+      className="formContainer"
+      className="centeredSP"
+    >
       <CssBaseline />
 
       <div className={classes.paper}>
-        <h2 className="titleColour">{props.PageTitle}</h2>
+        <h3>{props.PageTitle}</h3>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        {/* <Typography component="h1" variant="h5">
-          Software Product Management
-        </Typography> */}
+
+        {screenMessageCreateSP.message && screenMessageCreateSP.state && (
+          <Alert severity="success">{screenMessageCreateSP.message}</Alert>
+        )}
+
+        {screenMessageCreateSP.message && !screenMessageCreateSP.state && (
+          <Alert severity="error">{screenMessageCreateSP.message}</Alert>
+        )}
+
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
@@ -103,8 +124,8 @@ export function CreateSP(props) {
             name="legalEntityName"
             autoComplete="legalEntityName"
             autoFocus
-            onChange={setFormValues}
-            value={formState.legalEntityName}
+            onChange={(e) => setLegalEntityName(e.currentTarget.value)}
+            value={legalEntityName}
           />
           <TextField
             variant="outlined"
@@ -171,7 +192,7 @@ export function CreateSP(props) {
             color="primary"
             className={classes.submit}
           >
-            Create New Software Product
+            Software Product Management
           </Button>
         </form>
       </div>

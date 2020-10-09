@@ -9,6 +9,7 @@ export const useForm = (initialState) => {
     inputObject[name] = value;
     setUserInput(inputObject);
     console.log("logging user name ", name, value);
+    
   };
   return { userInput, captureUserInput };
 };

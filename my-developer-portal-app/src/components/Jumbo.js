@@ -22,15 +22,14 @@ const useStyles = makeStyles({
 function Jumbo() {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
-
   return (
-    <>
+    <div className="jumboPage">
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia
             component="img"
             alt="OB"
-            height="800"
+            height="400"
             image={homeImage}
             title="Open banking"
           />
@@ -62,8 +61,7 @@ function Jumbo() {
           </Button>
         </CardActions>
       </Card>
-    </>
+    </div>
   );
 }
-
 export default Jumbo;

@@ -15,7 +15,7 @@ function APIContainer() {
 
   return (
     <React.Fragment>
-      <h1 className="titleColour">Welcome to Open Banking APIs</h1>
+      {/* <h3 className="apiTitleColour">Welcome to Open Banking APIs</h3> */}
       <APIList metadataStateProperty={Metadata} />
     </React.Fragment>
   );

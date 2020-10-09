@@ -2,12 +2,16 @@ import React from "react";
 export class UserList extends React.Component {
   render() {
     return (
-      <ul>
+      <ul className="centered">
         {this.props.userStateProperty.map((eachUser) => {
           return (
-            <li key={eachUser.username}>
-              User name: {eachUser.username} User profile: {eachUser.profile}
-            </li>
+            <div>
+              <li key={eachUser.username}>
+                User name: {eachUser.firstName}
+                User Email: {eachUser.email}
+                User Role: {eachUser.role}
+              </li>
+            </div>
           );
         })}
       </ul>

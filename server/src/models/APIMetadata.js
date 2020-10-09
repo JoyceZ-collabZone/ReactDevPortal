@@ -3,11 +3,11 @@ const mongoose = require("mongoose");
 const apiSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: false,
   },
   description: {
     type: String,
-    required: true,
+    required: false,
   },
   scope: {
     type: String,
@@ -21,11 +21,11 @@ const apiSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  Swagger: {
+  swagger: {
     type: Object,
     required: false,
   },
-  Reference: {
+  reference: {
     type: String,
     required: false,
   },

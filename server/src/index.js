@@ -58,7 +58,7 @@ if (isProdEnv) {
   });
 }
 
-const portNumber = process.env.PORT || 8000;
+const portNumber = process.env.PORT || 6000;
 appWebServer.listen(portNumber, () => {
   console.log(`My web server is listening at http://localhost:${portNumber}`);
 });

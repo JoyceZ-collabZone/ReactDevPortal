@@ -12,6 +12,7 @@ import Logout from "./Logout";
 export default function Nav(props) {
   const handleUserClickLogout = () => {
     window.sessionStorage.removeItem("token");
+    window.sessionStorage.removeItem("userRole");
     props.loggedInState(false); // set loggedin to false
     props.loggedInUser("");
     props.setScreenMessageLogout({
@@ -21,37 +22,44 @@ export default function Nav(props) {
   };
 
   return (
-    <div class="topnav">
-      <ul>
-        <li>
-          <Link to="/home">Home</Link>
-        </li>
-        <li>
-          <Link to="/user/login">Sign In</Link>
-        </li>
-        <li></li>
-        <li>
-          <Link to="/register/user">Create New User</Link>
-
+    <React.Fragment>
+      <div class="sidebar">
+        <ul>
+          <li>
+            <Link to="/home">Home</Link>
+          </li>
+          <li>
+            <Link to="/user/login">Sign In</Link>
+          </li>
+          <li>
+            <Link to="/user">Registered User</Link>
+          </li>
+          <li>
+            <Link to="/register/user">Create New User</Link>
+          </li>
+          <li>
+            <Link to="/software/new">Software Product Registration</Link>
+          </li>
+          <li>
+            <Link to="/softwares/all"> View All Software Product</Link>
+          </li>
+          <li>
+            {props.loggedInState && (
+              <Link to="/APIMetadata/"> API Swagger Definition</Link>
+            )}
+          </li>
           <li>
             <Link to="/docupload">Upload New Swagger</Link>
           </li>
-        </li>
-        <li>
-          <Link to="/software/new">Software Product Registration</Link>
-        </li>
-        <li>
-          <Link to="/softwares/all"> View All Software Product</Link>
-        </li>
-        {props.loggedInState && (
-          <Link to="/APIMetadata/"> API Swagger Definition</Link>
-        )}
-        {props.loggedInState && (
-          <Link to="/logout" onClick={handleUserClickLogout}>
-            Logout
-          </Link>
-        )}
-      </ul>
-    </div>
+          <li>
+            {props.loggedInState && (
+              <Link to="/logout" onClick={handleUserClickLogout}>
+                Logout
+              </Link>
+            )}
+          </li>
+        </ul>
+      </div>
+    </React.Fragment>
   );
 }
