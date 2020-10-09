@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
+import Alert from "@material-ui/lab/Alert";
 
 import Jumbo from "./components/Jumbo";
 import "./App.css";
@@ -89,23 +90,25 @@ function App() {
               </Route>
 
               <Route path="/user">
-                {userRole === "staff" ? (
+                {loggedInState && userRole === "staff" ? (
                   <UserContainer />
                 ) : (
                   <div className="apiTitleColour">
-                    <h2>
+                    <Alert severity="error">
                       Sorry, you are not authorised to view this User listing
                       page
-                    </h2>
+                    </Alert>
                   </div>
                 )}
               </Route>
               <Route path="/docupload">
-                {userRole === "staff" ? (
+                {loggedInState && userRole === "staff" ? (
                   <CreateSwagger />
                 ) : (
                   <div className="apiTitleColour">
-                    <h2>Sorry, you are not authorised to upload document</h2>
+                    <Alert severity="error">
+                      Sorry, you are not authorised to upload document
+                    </Alert>
                   </div>
                 )}
               </Route>
@@ -114,14 +117,23 @@ function App() {
                   <APIContainer />
                 ) : (
                   <div className="apiTitleColour">
-                    <h2>
+                    <Alert severity="error">
                       Sorry, you need to login first to visit API dev portal
-                    </h2>
+                    </Alert>
                   </div>
                 )}
               </Route>
               <Route path="/software/new" exact={true}>
-                <AddSP />
+                {(loggedInState && userRole === "staff") ||
+                userRole === "admin" ? (
+                  <AddSP />
+                ) : (
+                  <div className="apiTitleColour">
+                    <Alert severity="error">
+                      Sorry, you are not authorised to create SP
+                    </Alert>
+                  </div>
+                )}
               </Route>
               <Route path="/APIMetadata/:swaggerId">
                 <SwaggerDefinition />
@@ -131,13 +143,13 @@ function App() {
                 <EditSP />
               </Route>
               <Route path="/softwares/all">
-                {userRole === "staff" ? (
+                {loggedInState && userRole === "staff" ? (
                   <SPHome />
                 ) : (
                   <div className="apiTitleColour">
-                    <h2>
+                    <Alert severity="error">
                       Sorry, you are not authorised to view this SP listing page
-                    </h2>
+                    </Alert>
                   </div>
                 )}
               </Route>
