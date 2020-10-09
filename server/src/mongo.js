@@ -1,9 +1,8 @@
 const mongoose = require("mongoose"); // not middleware as express.use middleware, not part of express engine
 
-const mongoUri = "mongodb://localhost/Onboarding";
+const mongoUri = process.env.MONGODB_URI || "mongodb://localhost/Onboarding";
 // mongodb://localhost:27017";
 // process.env.MONGODB_URI ||
-//  ||
 
 console.log("logging mongo environment", mongoUri);
 mongoose.connect(mongoUri, {
