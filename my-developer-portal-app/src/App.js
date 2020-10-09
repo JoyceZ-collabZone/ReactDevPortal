@@ -110,7 +110,15 @@ function App() {
                 )}
               </Route>
               <Route path="/APIMetadata" exact={true}>
-                {loggedInState && <APIContainer />}
+                {loggedInState ? (
+                  <APIContainer />
+                ) : (
+                  <div className="apiTitleColour">
+                    <h2>
+                      Sorry, you need to login first to visit API dev portal
+                    </h2>
+                  </div>
+                )}
               </Route>
               <Route path="/software/new" exact={true}>
                 <AddSP />
